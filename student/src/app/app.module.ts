@@ -4,23 +4,26 @@ import {
   RouterModule,
   Routes
 } from "@angular/router";
-
-import { TopMenuComponent } from './top-menu/top-menu.component';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { ClaimsComponent } from './claims/claims.component';
-import { ConnectionsComponent } from './connections/connections.component';
-import { ProfileComponent } from './profile/profile.component';
-import { SettingsComponent } from './settings/settings.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-
 import {
-MatButtonModule,
-MatCheckboxModule,
-MatIconModule,
-MatMenuModule,
-MatToolbarModule,
+  MatButtonModule,
+  MatCheckboxModule,
+  MatIconModule,
+  MatMenuModule,
+  MatToolbarModule,
 } from "@angular/material";
-import { RootComponent } from './root/root.component';
+
+import { TopMenuComponent } from './components/top-menu/top-menu.component';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ClaimsComponent } from './components/claims/claims.component';
+import { ConnectionsComponent } from './components/connections/connections.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { RootComponent } from './components/root/root.component';
+
+import { ClaimsService } from "./services/claims/claims.service";
+import { ConnectionsService } from "./services/connections/connections.service";
+import { ProfileService } from "./services/profile/profile.service";
 
 
 const appRoutes: Routes = [
@@ -70,7 +73,11 @@ const appRoutes: Routes = [
       {enableTracing: true}
     )
   ],
-  providers: [],
+  providers: [
+    ClaimsService,
+    ConnectionsService,
+    ProfileService
+  ],
   bootstrap: [RootComponent]
 })
 export class AppModule {
