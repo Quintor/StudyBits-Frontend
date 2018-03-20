@@ -13,6 +13,10 @@ import {
   MatTableModule,
   MatToolbarModule,
 } from "@angular/material";
+import {
+  FlexLayoutModule,
+  BREAKPOINTS
+} from '@angular/flex-layout';
 
 import { TopMenuComponent } from './components/top-menu/top-menu.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -26,9 +30,16 @@ import { RootComponent } from './components/root/root.component';
 import { ClaimsService } from "./services/claims/claims.service";
 import { ConnectionsService } from "./services/connections/connections.service";
 import { ProfileService } from "./services/profile/profile.service";
+import { DetailRowDirective } from "./directives/detail-row/detail-row.directive";
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 
 const appRoutes: Routes = [
+  {
+    path: '',
+    redirectTo: '/dashboard',
+    pathMatch: 'full'
+  },
   {
     path: 'dashboard',
     component: DashboardComponent
@@ -48,8 +59,19 @@ const appRoutes: Routes = [
   {
     path: 'settings',
     component: SettingsComponent
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent
   }
 ];
+
+const PRINT_BREAKPOINTS = [{
+  alias: 'xs.print',
+  suffix: 'XsPrint',
+  mediaQuery: 'print and (max-width: 297px)',
+  overlapping: false
+}];
 
 
 @NgModule({
@@ -60,7 +82,9 @@ const appRoutes: Routes = [
     ProfileComponent,
     SettingsComponent,
     DashboardComponent,
-    RootComponent
+    RootComponent,
+    DetailRowDirective,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -72,12 +96,17 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     MatTableModule,
     MatSortModule,
+    FlexLayoutModule,
     RouterModule.forRoot(
       appRoutes,
       {enableTracing: false}
     )
   ],
   providers: [
+    {
+      provide: BREAKPOINTS,
+      useValue: PRINT_BREAKPOINTS
+    },
     ClaimsService,
     ConnectionsService,
     ProfileService

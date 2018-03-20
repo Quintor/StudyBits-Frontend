@@ -1,3 +1,27 @@
-<p>
-  connections works!
-</p>
+<div class="data-table mat-elevation-z5">
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>id</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Role</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.role }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="newcomerName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Newcomer Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.newcomerName }}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" [detailRow]="row" [detailRowTpl]="tpl"></mat-row>
+  </mat-table>
+</div>
+
+<ng-template #tpl let-element>
+  <div class="mat-row" [@detailExpand] style="overflow: hidden">
+    <pre>{{ {"did": element.did, "nonce": element.nonce} | json }}</pre>
+  </div>
+</ng-template>
