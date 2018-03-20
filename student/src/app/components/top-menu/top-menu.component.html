@@ -1,10 +1,9 @@
-<mat-toolbar>
-  <img src="https://media.giphy.com/media/3ornk57KwDXf81rjWM/giphy.gif">
-  <span>Dashboard</span>
+<mat-toolbar class="mat-elevation-z8">
+  <span>{{ path }}</span>
   <span class="spacer"></span>
-  <button mat-raised-button routerLink="/">
+  <button mat-raised-button routerLink="/dashboard">
     <mat-icon>dashboard</mat-icon>
-    Home
+    Dashboard
   </button>
   <button mat-raised-button routerLink="/claims">
     <mat-icon>receipt</mat-icon>

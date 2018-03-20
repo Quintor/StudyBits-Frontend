@@ -9,6 +9,8 @@ import {
   MatCheckboxModule,
   MatIconModule,
   MatMenuModule,
+  MatSortModule,
+  MatTableModule,
   MatToolbarModule,
 } from "@angular/material";
 
@@ -28,7 +30,7 @@ import { ProfileService } from "./services/profile/profile.service";
 
 const appRoutes: Routes = [
   {
-    path: '',
+    path: 'dashboard',
     component: DashboardComponent
   },
   {
@@ -68,9 +70,11 @@ const appRoutes: Routes = [
     MatIconModule,
     MatCheckboxModule,
     BrowserAnimationsModule,
+    MatTableModule,
+    MatSortModule,
     RouterModule.forRoot(
       appRoutes,
-      {enableTracing: true}
+      {enableTracing: false}
     )
   ],
   providers: [
