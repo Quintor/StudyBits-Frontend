@@ -5,9 +5,8 @@ body {
   margin: 0;
 }
 
-.data-table {
-  width: 75%;
-  margin: 0 auto;
+mat-sidenav {
+  width: 200px;
 }
 
 .element-row:not(.expanded) {

@@ -40,19 +40,15 @@ export class ConnectionsComponent implements OnInit {
   connections: ConnectionRecord[];
   dataSource: MatTableDataSource<any>;
   displayedColumns = ['id', 'role', 'newcomerName'];
-  detailDisplayedColumns = ['nonce', 'did'];
 
   // For sorting of the table columns
   @ViewChild(MatSort) sort: MatSort;
 
-  // For expanding rows
-  isExpansionDetailRow = ( index, row ) => row.hasOwnProperty('appDetailRow');
-
-  constructor( private connectionsService: ConnectionsService ) { }
+  constructor( private connectionsService: ConnectionsService ) {
+  }
 
   ngOnInit(): void {
     this.connections = this.connectionsService.getAllConnections();
-    console.log(this.connections);
     this.dataSource = new MatTableDataSource(this.connections);
   }
 

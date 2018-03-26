@@ -45,9 +45,6 @@ export class ClaimsComponent implements OnInit {
   // For sorting of the table columns
   @ViewChild(MatSort) sort: MatSort;
 
-  // For expanding rows
-  isExpansionDetailRow = ( index, row ) => row.hasOwnProperty('detailRow');
-
   constructor( private claimsService: ClaimsService ) {
   }
 

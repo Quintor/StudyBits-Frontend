@@ -7,15 +7,17 @@ import {
 import {
   MatButtonModule,
   MatCheckboxModule,
+  MatDividerModule,
   MatIconModule,
   MatMenuModule,
+  MatSidenavModule,
   MatSortModule,
   MatTableModule,
   MatToolbarModule,
 } from "@angular/material";
 import {
-  FlexLayoutModule,
-  BREAKPOINTS
+  BREAKPOINTS,
+  FlexLayoutModule
 } from '@angular/flex-layout';
 
 import { TopMenuComponent } from './components/top-menu/top-menu.component';
@@ -90,6 +92,7 @@ const PRINT_BREAKPOINTS = [{
     BrowserModule,
     MatToolbarModule,
     MatMenuModule,
+    MatSidenavModule,
     MatButtonModule,
     MatIconModule,
     MatCheckboxModule,
@@ -97,6 +100,7 @@ const PRINT_BREAKPOINTS = [{
     MatTableModule,
     MatSortModule,
     FlexLayoutModule,
+    MatDividerModule,
     RouterModule.forRoot(
       appRoutes,
       {enableTracing: false}
