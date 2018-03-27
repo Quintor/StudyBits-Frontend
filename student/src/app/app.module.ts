@@ -14,6 +14,7 @@ import {
   MatSortModule,
   MatTableModule,
   MatToolbarModule,
+  MatFormFieldModule, MatInput, MatInputModule
 } from "@angular/material";
 import {
   BREAKPOINTS,
@@ -34,33 +35,47 @@ import { ConnectionsService } from "./services/connections/connections.service";
 import { ProfileService } from "./services/profile/profile.service";
 import { DetailRowDirective } from "./directives/detail-row/detail-row.directive";
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { HttpClientModule } from "@angular/common/http";
+import { FormsModule} from "@angular/forms";
+import { LoginComponent } from './login/login.component';
+import {AuthGuardService} from "./auth-guard.service";
+import {AuthService} from "./auth.service";
 
 
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: '/dashboard',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
   {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'claims',
-    component: ClaimsComponent
+    component: ClaimsComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'connections',
-    component: ConnectionsComponent
+    component: ConnectionsComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'settings',
-    component: SettingsComponent
+    component: SettingsComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: '**',
@@ -86,21 +101,26 @@ const PRINT_BREAKPOINTS = [{
     DashboardComponent,
     RootComponent,
     DetailRowDirective,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     MatToolbarModule,
     MatMenuModule,
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
+    MatInputModule,
     MatCheckboxModule,
     BrowserAnimationsModule,
     MatTableModule,
     MatSortModule,
+    MatFormFieldModule,
     FlexLayoutModule,
     MatDividerModule,
+    FormsModule,
     RouterModule.forRoot(
       appRoutes,
       {enableTracing: false}
@@ -111,6 +131,8 @@ const PRINT_BREAKPOINTS = [{
       provide: BREAKPOINTS,
       useValue: PRINT_BREAKPOINTS
     },
+    AuthService,
+    AuthGuardService,
     ClaimsService,
     ConnectionsService,
     ProfileService
