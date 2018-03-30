@@ -2,18 +2,18 @@
 <div class="data-table mat-elevation-z5">
   <mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>id</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Connection ID</mat-header-cell>
       <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="role">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Role</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.role }}</mat-cell>
+    <ng-container matColumnDef="student">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Student</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.student.username }}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="newcomerName">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Newcomer Name</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.newcomerName }}</mat-cell>
+    <ng-container matColumnDef="university">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>University</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.university.name }}</mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

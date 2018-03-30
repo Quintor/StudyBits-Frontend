@@ -15,7 +15,7 @@ import {
   MatTableModule,
   MatToolbarModule,
   MatFormFieldModule, MatInput, MatInputModule, MatSelectModule,
-  MatDialogModule
+  MatDialogModule,
   MatSnackBarModule,
 } from "@angular/material";
 import {

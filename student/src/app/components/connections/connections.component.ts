@@ -47,7 +47,7 @@ import {StudentService} from "../../services/students/student.service";
 export class ConnectionsComponent implements OnInit {
   connections: ConnectionRecord[];
   dataSource: MatTableDataSource<any>;
-  displayedColumns = ['id', 'role', 'newcomerName'];
+  displayedColumns = ['id', 'student', 'university'];
 
   universities: University[];
 
@@ -58,8 +58,7 @@ export class ConnectionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.connections = this.connectionsService.getAllConnections();
-    this.dataSource = new MatTableDataSource(this.connections);
+    this.refreshConnections();
     this.universityService.getUniversities().subscribe(universities => this.universities = universities);
   }
 
@@ -77,10 +76,19 @@ export class ConnectionsComponent implements OnInit {
       this.studentService.onboard(this.authService.currentUser, result).subscribe((result) => {
         let message = result ? "Onboarding succeeded" : "Onboarding failed";
         this.snackBar.open(message, null, {duration: 1000});
+        this.refreshConnections();
       }
       );
       console.log(result);
     })
+  }
+
+  private refreshConnections() : void {
+    this.connectionsService.getAllConnections(this.authService.currentUser.id).subscribe(connections => {
+      this.connections = connections;
+      this.dataSource = new MatTableDataSource(this.connections);
+    });
+
   }
 }
 
