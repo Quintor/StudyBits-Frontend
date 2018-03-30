@@ -14,7 +14,9 @@ import {
   MatSortModule,
   MatTableModule,
   MatToolbarModule,
-  MatFormFieldModule, MatInput, MatInputModule
+  MatFormFieldModule, MatInput, MatInputModule, MatSelectModule,
+  MatDialogModule
+  MatSnackBarModule,
 } from "@angular/material";
 import {
   BREAKPOINTS,
@@ -40,6 +42,9 @@ import { FormsModule} from "@angular/forms";
 import { LoginComponent } from './login/login.component';
 import {AuthGuardService} from "./auth-guard.service";
 import {AuthService} from "./auth.service";
+import { CreateDialogComponent } from './components/connections/create-dialog/create-dialog.component';
+import {UniversityService} from './services/universities/university.service';
+import {StudentService} from "./services/students/student.service";
 
 
 const appRoutes: Routes = [
@@ -102,7 +107,11 @@ const PRINT_BREAKPOINTS = [{
     RootComponent,
     DetailRowDirective,
     PageNotFoundComponent,
-    LoginComponent
+    LoginComponent,
+    CreateDialogComponent
+  ],
+  entryComponents: [
+    CreateDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -112,8 +121,11 @@ const PRINT_BREAKPOINTS = [{
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
+    MatSelectModule,
     MatInputModule,
+    MatSnackBarModule,
     MatCheckboxModule,
+    MatDialogModule,
     BrowserAnimationsModule,
     MatTableModule,
     MatSortModule,
@@ -135,7 +147,9 @@ const PRINT_BREAKPOINTS = [{
     AuthGuardService,
     ClaimsService,
     ConnectionsService,
-    ProfileService
+    ProfileService,
+    StudentService,
+    UniversityService
   ],
   bootstrap: [RootComponent]
 })

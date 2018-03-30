@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {User} from "../model/user";
+import {Student} from "../model/student";
 import {Router} from "@angular/router";
 import {AuthService} from "../auth.service";
 
@@ -9,7 +9,8 @@ import {AuthService} from "../auth.service";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  user : User = new User("");
+  user : Student = {username: "", id: 0};
+  failedLogin = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -21,6 +22,10 @@ export class LoginComponent implements OnInit {
       if (this.authService.isLoggedIn) {
         let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/dashboard';
         this.router.navigate([redirect]);
+      }
+      else {
+        console.log("Failing login!");
+        this.failedLogin = true;
       }
     });
   }

@@ -1,7 +1,4 @@
-<mat-sidenav mode="side" opened>
-  <button mat-button>Add connection</button>
-</mat-sidenav>
-
+<button id="add-connection" mat-mini-fab (click)="openDialog()"><mat-icon>add</mat-icon></button>
 <div class="data-table mat-elevation-z5">
   <mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="id">
@@ -24,8 +21,16 @@
   </mat-table>
 </div>
 
+
+
 <ng-template #tpl let-element>
   <div class="mat-row" [@detailExpand] style="overflow: hidden">
     <pre>{{ {"did": element.did, "nonce": element.nonce} | json }}</pre>
   </div>
 </ng-template>
+
+
+
+
+
+

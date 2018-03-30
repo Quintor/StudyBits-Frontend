@@ -1,21 +1,30 @@
 import { Injectable } from '@angular/core';
-import {User} from "./model/user";
+import {Student} from "./model/student";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/delay'
-import 'rxjs/add/operator/do'
+import 'rxjs/add/operator/map'
+import {HttpClient, HttpErrorResponse, HttpParams} from "@angular/common/http";
+import {AppModule} from "./app.module";
+import {AppSettings} from "./app.settings";
 
 @Injectable()
 export class AuthService {
   isLoggedIn = false;
   redirectUrl: string;
-  currentUser: User;
-  constructor() { }
+  currentUser: Student;
 
-  login(user: User): Observable<boolean> {
-    return Observable.of(true).delay(100)
-      .do(val => {
-        this.currentUser = user;
-        this.isLoggedIn = true;
-      });
+  constructor(private httpClient: HttpClient) { }
+
+  login(user: Student): Observable<boolean> {
+    let params = new HttpParams().set("name", user.username);
+
+    return this.httpClient.get<Student[]>(AppSettings.API_ENDPOINT + "student", {params: params}).map((users) => {
+      if (users.length === 0) {
+        return false;
+      }
+      this.isLoggedIn = true;
+      this.currentUser = users[0];
+      return true;
+    });
   }
 }
