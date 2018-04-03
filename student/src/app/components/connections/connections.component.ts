@@ -1,9 +1,10 @@
 import {
-  Component,
+  Component, Inject,
   OnInit,
   ViewChild
 } from '@angular/core';
 import {
+  MatDialog, MatDialogRef,
   MatSort,
   MatTableDataSource
 } from "@angular/material";
@@ -16,6 +17,12 @@ import {
   transition,
   trigger
 } from "@angular/animations";
+import {MAT_DIALOG_DATA, MatSnackBar} from "@angular/material";
+import {CreateDialogComponent} from './create-dialog/create-dialog.component';
+import {University} from "../../model/university";
+import {UniversityService} from "../../services/universities/university.service";
+import {AuthService} from "../../auth.service";
+import {StudentService} from "../../services/students/student.service";
 
 @Component({
   selector: 'app-connections',
@@ -36,24 +43,53 @@ import {
     ]),
   ],
 })
+
 export class ConnectionsComponent implements OnInit {
   connections: ConnectionRecord[];
   dataSource: MatTableDataSource<any>;
-  displayedColumns = ['id', 'role', 'newcomerName'];
+  displayedColumns = ['id', 'student', 'university'];
+
+  universities: University[];
 
   // For sorting of the table columns
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor( private connectionsService: ConnectionsService ) {
+  constructor( private connectionsService: ConnectionsService, private dialog: MatDialog, private snackBar: MatSnackBar, private universityService: UniversityService, private authService: AuthService, private studentService: StudentService) {
   }
 
   ngOnInit(): void {
-    this.connections = this.connectionsService.getAllConnections();
-    this.dataSource = new MatTableDataSource(this.connections);
+    this.refreshConnections();
+    this.universityService.getUniversities().subscribe(universities => this.universities = universities);
   }
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
   }
 
+  openDialog() : void {
+    let dialogRef = this.dialog.open(CreateDialogComponent, {
+      width: '250px',
+      data: {universities: this.universities}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.studentService.onboard(this.authService.currentUser, result).subscribe((result) => {
+        let message = result ? "Onboarding succeeded" : "Onboarding failed";
+        this.snackBar.open(message, null, {duration: 1000});
+        this.refreshConnections();
+      }
+      );
+      console.log(result);
+    })
+  }
+
+  private refreshConnections() : void {
+    this.connectionsService.getAllConnections(this.authService.currentUser.id).subscribe(connections => {
+      this.connections = connections;
+      this.dataSource = new MatTableDataSource(this.connections);
+    });
+
+  }
 }
+
+

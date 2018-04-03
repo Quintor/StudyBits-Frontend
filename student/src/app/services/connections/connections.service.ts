@@ -1,20 +1,16 @@
 import { Injectable } from '@angular/core';
 import { ConnectionRecord } from "../../model/connectionRecord";
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {AuthService} from "../../auth.service";
+import {AppSettings} from "../../app.settings";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class ConnectionsService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
-  getAllConnections() {
-    // TODO: Add connection to backend
-    return [
-      new ConnectionRecord(Math.floor(Math.random() * 1000), Math.random().toString(36).slice(2), Math.random().toString(36).slice(2), "University of Groningen", "Peter", Math.random().toString(36).slice(2)),
-      new ConnectionRecord(Math.floor(Math.random() * 1000), Math.random().toString(36).slice(2), Math.random().toString(36).slice(2), "University of Gent", "Peter", Math.random().toString(36).slice(2)),
-      new ConnectionRecord(Math.floor(Math.random() * 1000), Math.random().toString(36).slice(2), Math.random().toString(36).slice(2), "Quintor B.V.", "Peter", Math.random().toString(36).slice(2)),
-      new ConnectionRecord(Math.floor(Math.random() * 1000), Math.random().toString(36).slice(2), Math.random().toString(36).slice(2), "DUO", "Peter", Math.random().toString(36).slice(2)),
-      new ConnectionRecord(Math.floor(Math.random() * 1000), Math.random().toString(36).slice(2), Math.random().toString(36).slice(2), "Rabo Bank", "Peter", Math.random().toString(36).slice(2)),
-      new ConnectionRecord(Math.floor(Math.random() * 1000), Math.random().toString(36).slice(2), Math.random().toString(36).slice(2), "Dream Employer", "Peter", Math.random().toString(36).slice(2))
-    ]
+  getAllConnections(studentId: number) : Observable<ConnectionRecord[]> {
+    return this.httpClient.get<ConnectionRecord[]>(AppSettings.API_ENDPOINT + `student/${studentId}/connections`)
   }
 }
