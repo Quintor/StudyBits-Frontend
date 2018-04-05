@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {AuthService} from '../../auth.service';
-import {University} from '../../model/university';
-import {Student} from '../../model/student';
-import {AppModule} from '../../app.module';
-import {AppSettings} from '../../app.settings';
-import {Observable} from 'rxjs/Observable';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { University } from '../../model/university';
+import { Student } from '../../model/student';
+import { AppSettings } from '../../app.settings';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class StudentService {
 
-  constructor(private httpClient: HttpClient, private authService: AuthService) {
+  constructor(private httpClient: HttpClient) {
 
   }
 

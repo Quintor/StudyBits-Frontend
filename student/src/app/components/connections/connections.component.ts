@@ -1,28 +1,13 @@
-import {
-  Component, Inject,
-  OnInit,
-  ViewChild
-} from '@angular/core';
-import {
-  MatDialog, MatDialogRef,
-  MatSort,
-  MatTableDataSource
-} from '@angular/material';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
 import { ConnectionRecord } from '../../model/connectionRecord';
-import { ConnectionsService } from '../../services/connections/connections.service';
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger
-} from '@angular/animations';
-import {MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
-import {CreateDialogComponent} from './create-dialog/create-dialog.component';
-import {University} from '../../model/university';
-import {UniversityService} from '../../services/universities/university.service';
-import {AuthService} from '../../auth.service';
-import {StudentService} from '../../services/students/student.service';
+import { ConnectionsService } from '../../services/connection/connections.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { CreateDialogComponent } from './create-dialog/create-dialog.component';
+import { University } from '../../model/university';
+import { UniversityService } from '../../services/universities/university.service';
+import { AuthService } from '../../services/auth/auth.service';
+import { StudentService } from '../../services/student/student.service';
 
 @Component({
   selector: 'app-connections',

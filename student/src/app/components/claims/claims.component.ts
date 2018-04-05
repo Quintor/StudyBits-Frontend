@@ -1,24 +1,10 @@
-import {
-  Component,
-  OnInit,
-  ViewChild
-} from '@angular/core';
-import { ClaimsService } from '../../services/claims/claims.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ClaimsService } from '../../services/claim/claims.service';
 import { ClaimRecord } from '../../model/claimRecord';
-import {
-  MatSnackBar,
-  MatSort,
-  MatTableDataSource
-} from '@angular/material';
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger
-} from '@angular/animations';
+import { MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import 'rxjs/add/observable/of';
-import { AuthService } from '../../auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-claims',

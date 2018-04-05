@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { ClaimRecord } from '../../model/claimRecord';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { Student } from '../../model/student';
 import { AppSettings } from '../../app.settings';
-import { ConnectionRecord } from '../../model/connectionRecord';
 
 @Injectable()
 export class ClaimsService {
