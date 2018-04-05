@@ -1,11 +1,4 @@
-import {
-  Directive,
-  HostBinding,
-  HostListener,
-  Input,
-  TemplateRef,
-  ViewContainerRef
-} from '@angular/core';
+import { Directive, HostBinding, HostListener, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
 @Directive({
   selector: '[detailRow]'
@@ -36,7 +29,8 @@ export class DetailRowDirective {
     }
   }
 
-  constructor(public vcRef: ViewContainerRef) { }
+  constructor(public vcRef: ViewContainerRef) {
+  }
 
   @HostListener('click')
   onClick(): void {
@@ -55,7 +49,7 @@ export class DetailRowDirective {
   private render(): void {
     this.vcRef.clear();
     if (this.tRef && this.row) {
-      this.vcRef.createEmbeddedView(this.tRef, { $implicit: this.row });
+      this.vcRef.createEmbeddedView(this.tRef, {$implicit: this.row});
     }
   }
 

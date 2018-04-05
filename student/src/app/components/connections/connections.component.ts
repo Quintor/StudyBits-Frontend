@@ -1,28 +1,13 @@
-import {
-  Component, Inject,
-  OnInit,
-  ViewChild
-} from '@angular/core';
-import {
-  MatDialog, MatDialogRef,
-  MatSort,
-  MatTableDataSource
-} from "@angular/material";
-import { ConnectionRecord } from "../../model/connectionRecord";
-import { ConnectionsService } from "../../services/connections/connections.service";
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger
-} from "@angular/animations";
-import {MAT_DIALOG_DATA, MatSnackBar} from "@angular/material";
-import {CreateDialogComponent} from './create-dialog/create-dialog.component';
-import {University} from "../../model/university";
-import {UniversityService} from "../../services/universities/university.service";
-import {AuthService} from "../../auth.service";
-import {StudentService} from "../../services/students/student.service";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
+import { ConnectionRecord } from '../../model/connectionRecord';
+import { ConnectionsService } from '../../services/connections/connections.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { CreateDialogComponent } from './create-dialog/create-dialog.component';
+import { University } from '../../model/university';
+import { UniversityService } from '../../services/universities/university.service';
+import { AuthService } from '../../auth.service';
+import { StudentService } from '../../services/students/student.service';
 
 @Component({
   selector: 'app-connections',
@@ -54,7 +39,7 @@ export class ConnectionsComponent implements OnInit {
   // For sorting of the table columns
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor( private connectionsService: ConnectionsService, private dialog: MatDialog, private snackBar: MatSnackBar, private universityService: UniversityService, private authService: AuthService, private studentService: StudentService) {
+  constructor(private connectionsService: ConnectionsService, private dialog: MatDialog, private snackBar: MatSnackBar, private universityService: UniversityService, private authService: AuthService, private studentService: StudentService) {
   }
 
   ngOnInit(): void {
@@ -66,24 +51,24 @@ export class ConnectionsComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  openDialog() : void {
-    let dialogRef = this.dialog.open(CreateDialogComponent, {
+  openDialog(): void {
+    const dialogRef = this.dialog.open(CreateDialogComponent, {
       width: '250px',
       data: {universities: this.universities}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       this.studentService.onboard(this.authService.currentUser, result).subscribe((result) => {
-        let message = result ? "Onboarding succeeded" : "Onboarding failed";
-        this.snackBar.open(message, null, {duration: 1000});
-        this.refreshConnections();
-      }
+          const message = result ? 'Onboarding succeeded' : 'Onboarding failed';
+          this.snackBar.open(message, null, {duration: 1000});
+          this.refreshConnections();
+        }
       );
       console.log(result);
-    })
+    });
   }
 
-  private refreshConnections() : void {
+  private refreshConnections(): void {
     this.connectionsService.getAllConnections(this.authService.currentUser.id).subscribe(connections => {
       this.connections = connections;
       this.dataSource = new MatTableDataSource(this.connections);

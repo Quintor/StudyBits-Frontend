@@ -1,30 +1,26 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {
-  RouterModule,
-  Routes
-} from "@angular/router";
+import { RouterModule, Routes } from '@angular/router';
 import {
   MatButtonModule,
   MatCheckboxModule,
+  MatDialogModule,
   MatDividerModule,
+  MatFormFieldModule,
   MatIconModule,
+  MatInputModule,
   MatMenuModule,
+  MatSelectModule,
   MatSidenavModule,
+  MatSnackBarModule,
   MatSortModule,
   MatTableModule,
   MatToolbarModule,
-  MatFormFieldModule, MatInput, MatInputModule, MatSelectModule,
-  MatDialogModule,
-  MatSnackBarModule,
-} from "@angular/material";
-import {
-  BREAKPOINTS,
-  FlexLayoutModule
-} from '@angular/flex-layout';
+} from '@angular/material';
+import { BREAKPOINTS, FlexLayoutModule } from '@angular/flex-layout';
 
 import { TopMenuComponent } from './components/top-menu/top-menu.component';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClaimsComponent } from './components/claims/claims.component';
 import { ConnectionsComponent } from './components/connections/connections.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -32,19 +28,19 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RootComponent } from './components/root/root.component';
 
-import { ClaimsService } from "./services/claims/claims.service";
-import { ConnectionsService } from "./services/connections/connections.service";
-import { ProfileService } from "./services/profile/profile.service";
-import { DetailRowDirective } from "./directives/detail-row/detail-row.directive";
+import { ClaimsService } from './services/claims/claims.service';
+import { ConnectionsService } from './services/connections/connections.service';
+import { ProfileService } from './services/profile/profile.service';
+import { DetailRowDirective } from './directives/detail-row/detail-row.directive';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { HttpClientModule } from "@angular/common/http";
-import { FormsModule} from "@angular/forms";
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
-import {AuthGuardService} from "./auth-guard.service";
-import {AuthService} from "./auth.service";
+import { AuthGuardService } from './auth-guard.service';
+import { AuthService } from './auth.service';
 import { CreateDialogComponent } from './components/connections/create-dialog/create-dialog.component';
-import {UniversityService} from './services/universities/university.service';
-import {StudentService} from "./services/students/student.service";
+import { UniversityService } from './services/universities/university.service';
+import { StudentService } from './services/students/student.service';
 
 
 const appRoutes: Routes = [

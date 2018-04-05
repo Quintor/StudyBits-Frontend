@@ -1,7 +1,7 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Student} from "../model/student";
-import {Router} from "@angular/router";
-import {AuthService} from "../auth.service";
+import { Component, OnInit } from '@angular/core';
+import { Student } from '../model/student';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,10 +9,11 @@ import {AuthService} from "../auth.service";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  user : Student = {username: "", id: 0};
+  user: Student = {username: '', id: 0};
   failedLogin = false;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {
+  }
 
   ngOnInit() {
   }
@@ -20,11 +21,10 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(this.user).subscribe(() => {
       if (this.authService.isLoggedIn) {
-        let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/dashboard';
+        const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/dashboard';
         this.router.navigate([redirect]);
-      }
-      else {
-        console.log("Failing login!");
+      } else {
+        console.log('Failing login!');
         this.failedLogin = true;
       }
     });

@@ -1,22 +1,9 @@
-import {
-  Component,
-  OnInit,
-  ViewChild
-} from '@angular/core';
-import { ClaimsService } from "../../services/claims/claims.service";
-import { ClaimRecord } from "../../model/claimRecord";
-import {
-  MatSort,
-  MatTableDataSource
-} from "@angular/material";
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger
-} from "@angular/animations";
-import 'rxjs/add/observable/of'
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ClaimsService } from '../../services/claims/claims.service';
+import { ClaimRecord } from '../../model/claimRecord';
+import { MatSort, MatTableDataSource } from '@angular/material';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import 'rxjs/add/observable/of';
 
 @Component({
   selector: 'app-claims',
@@ -45,7 +32,7 @@ export class ClaimsComponent implements OnInit {
   // For sorting of the table columns
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor( private claimsService: ClaimsService ) {
+  constructor(private claimsService: ClaimsService) {
   }
 
   ngOnInit(): void {

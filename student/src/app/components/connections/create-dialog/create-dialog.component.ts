@@ -1,6 +1,5 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef, MatSelect} from "@angular/material";
-import {University} from "../../../model/university";
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-create-dialog',
@@ -8,11 +7,11 @@ import {University} from "../../../model/university";
   styleUrls: ['./create-dialog.component.css']
 })
 export class CreateDialogComponent {
-  selected : string;
+  selected: string;
 
-  constructor(
-    public dialogRef: MatDialogRef<CreateDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(public dialogRef: MatDialogRef<CreateDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
+  }
 
   onNoClick(): void {
     this.dialogRef.close(this.selected);

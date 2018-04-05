@@ -8,9 +8,9 @@ describe('ConnectionsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConnectionsComponent ]
+      declarations: [ConnectionsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,33 +1,34 @@
-  <mat-sidenav-container>
-    <mat-sidenav mode="side" opened>
-      <button mat-button>Request new Claim</button>
-      <mat-divider></mat-divider>
-      <button mat-button>Edit Claim</button>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <div class="data-table mat-elevation-z5">
-        <mat-table [dataSource]="dataSource" matSort>
-          <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>id</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
-          </ng-container>
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <button mat-button>Request new Claim</button>
+    <mat-divider></mat-divider>
+    <button mat-button>Edit Claim</button>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="data-table mat-elevation-z5">
+      <mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>id</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
+        </ng-container>
 
-          <ng-container matColumnDef="issuerDid">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Issuer DID</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{ element.issuerDid }}</mat-cell>
-          </ng-container>
+        <ng-container matColumnDef="issuerDid">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Issuer DID</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.issuerDid }}</mat-cell>
+        </ng-container>
 
-          <ng-container matColumnDef="myDid">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>My DID</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{ element.myDid }}</mat-cell>
-          </ng-container>
+        <ng-container matColumnDef="myDid">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>My DID</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.myDid }}</mat-cell>
+        </ng-container>
 
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" [detailRow]="row" [detailRowTpl]="tpl"></mat-row>
-        </mat-table>
-      </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" [detailRow]="row"
+                 [detailRowTpl]="tpl"></mat-row>
+      </mat-table>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
 
 <ng-template #tpl let-element>
   <div class="mat-row" [@detailExpand] style="overflow: hidden">

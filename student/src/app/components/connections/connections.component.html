@@ -1,4 +1,6 @@
-<button id="add-connection" mat-mini-fab (click)="openDialog()"><mat-icon>add</mat-icon></button>
+<button id="add-connection" mat-mini-fab (click)="openDialog()">
+  <mat-icon>add</mat-icon>
+</button>
 <div class="data-table mat-elevation-z5">
   <mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="id">
@@ -17,10 +19,10 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" [detailRow]="row" [detailRowTpl]="tpl"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" [detailRow]="row"
+             [detailRowTpl]="tpl"></mat-row>
   </mat-table>
 </div>
-
 
 
 <ng-template #tpl let-element>
