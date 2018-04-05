@@ -55,15 +55,15 @@ export class ClaimsComponent implements OnInit {
   }
 
   private getClaims() {
-    console.log("Getting claims...");
+    console.log('Getting claims...');
     this.claimsService.getAllClaims(this.authService.currentUser.userName).subscribe((claimrecords) => {
-      console.log("Gotten claims!");
+      console.log('Gotten claims!');
       this.claims = claimrecords;
       this.dataSource = new MatTableDataSource(this.claims);
     });
   }
 
-  private getValuesAsObject(claim: ClaimRecord) : any {
+  private getValuesAsObject(claim: ClaimRecord): any {
     return JSON.parse(claim.values);
   }
 
@@ -76,6 +76,6 @@ export class ClaimsComponent implements OnInit {
       const message = success ? 'Getting claims succeeded' : 'Getting claims failed';
       this.snackBar.open(message, null, {duration: 1000});
       this.getClaims();
-    })
+    });
   }
 }

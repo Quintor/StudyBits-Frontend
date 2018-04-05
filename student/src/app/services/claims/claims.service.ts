@@ -9,9 +9,9 @@ import { ConnectionRecord } from '../../model/connectionRecord';
 @Injectable()
 export class ClaimsService {
 
-  constructor(private httpClient : HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  getAllClaims(studentUsername: string) : Observable<ClaimRecord[]>{
+  getAllClaims(studentUsername: string): Observable<ClaimRecord[]> {
     return this.httpClient.get<ClaimRecord[]>(AppSettings.API_ENDPOINT + `student/${studentUsername}/claims`);
   }
 
