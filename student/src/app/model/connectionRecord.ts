@@ -1,5 +1,5 @@
-import {University} from "./university";
-import {Student} from "./student";
+import {University} from './university';
+import {Student} from './student';
 
 export class ConnectionRecord {
   id: number;

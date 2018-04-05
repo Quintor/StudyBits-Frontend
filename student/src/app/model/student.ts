@@ -1,9 +1,13 @@
+import { University } from './university';
+
 export class Student {
   id: number;
-  username: string;
+  userName: string;
+  originUniversity: University;
 
-  constructor(id: number, name: string ) {
+  constructor(id: number, userName: string , originUniversity: University) {
     this.id = id;
-    this.username = name;
+    this.userName = userName;
+    this.originUniversity = originUniversity;
   }
 }

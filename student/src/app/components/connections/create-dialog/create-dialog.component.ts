@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef, MatSelect} from "@angular/material";
-import {University} from "../../../model/university";
+import {MAT_DIALOG_DATA, MatDialogRef, MatSelect} from '@angular/material';
+import {University} from '../../../model/university';
 
 @Component({
   selector: 'app-create-dialog',
@@ -8,7 +8,7 @@ import {University} from "../../../model/university";
   styleUrls: ['./create-dialog.component.css']
 })
 export class CreateDialogComponent {
-  selected : string;
+  selected: string;
 
   constructor(
     public dialogRef: MatDialogRef<CreateDialogComponent>,

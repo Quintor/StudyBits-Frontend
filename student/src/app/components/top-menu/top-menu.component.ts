@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {
   NavigationEnd,
   Router
-} from "@angular/router";
+} from '@angular/router';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-top-menu',
@@ -13,7 +14,7 @@ export class TopMenuComponent implements OnInit {
 
   private path: string;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
     this.subscribeForNavigationEvents();
@@ -22,10 +23,14 @@ export class TopMenuComponent implements OnInit {
   subscribeForNavigationEvents() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        let newPath = event.urlAfterRedirects.slice(1);
+        const newPath = event.urlAfterRedirects.slice(1);
         this.path = newPath.charAt(0).toUpperCase() + newPath.slice(1);
       }
-    })
+    });
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 
 
