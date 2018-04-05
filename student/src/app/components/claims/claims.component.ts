@@ -3,20 +3,20 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import { ClaimsService } from "../../services/claims/claims.service";
-import { ClaimRecord } from "../../model/claimRecord";
+import { ClaimsService } from '../../services/claims/claims.service';
+import { ClaimRecord } from '../../model/claimRecord';
 import {
   MatSort,
   MatTableDataSource
-} from "@angular/material";
+} from '@angular/material';
 import {
   animate,
   state,
   style,
   transition,
   trigger
-} from "@angular/animations";
-import 'rxjs/add/observable/of'
+} from '@angular/animations';
+import 'rxjs/add/observable/of';
 
 @Component({
   selector: 'app-claims',

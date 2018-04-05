@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   NavigationEnd,
   Router
-} from "@angular/router";
+} from '@angular/router';
 
 @Component({
   selector: 'app-top-menu',
@@ -22,10 +22,10 @@ export class TopMenuComponent implements OnInit {
   subscribeForNavigationEvents() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        let newPath = event.urlAfterRedirects.slice(1);
+        const newPath = event.urlAfterRedirects.slice(1);
         this.path = newPath.charAt(0).toUpperCase() + newPath.slice(1);
       }
-    })
+    });
   }
 
 
