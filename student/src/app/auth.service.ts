@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import {AppModule} from './app.module';
 import {AppSettings} from './app.settings';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
@@ -13,7 +14,7 @@ export class AuthService {
   redirectUrl: string;
   currentUser: Student;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
   login(user: Student): Observable<boolean> {
     const params = new HttpParams().set('name', user.userName);
@@ -26,5 +27,11 @@ export class AuthService {
       this.currentUser = users[0];
       return true;
     });
+  }
+
+  logout() {
+    this.isLoggedIn = false;
+    this.currentUser = null;
+    this.router.navigate(['/login']);
   }
 }
