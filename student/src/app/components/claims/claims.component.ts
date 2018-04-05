@@ -42,7 +42,7 @@ import { AuthService } from '../../auth.service';
 export class ClaimsComponent implements OnInit {
   claims: ClaimRecord[];
   dataSource: MatTableDataSource<any>;
-  displayedColumns = ['id', 'issuerDid', 'myDid'];
+  displayedColumns = ['id', 'issuerDid', 'uniName'];
 
   // For sorting of the table columns
   @ViewChild(MatSort) sort: MatSort;
@@ -61,6 +61,10 @@ export class ClaimsComponent implements OnInit {
       this.claims = claimrecords;
       this.dataSource = new MatTableDataSource(this.claims);
     });
+  }
+
+  private getValuesAsObject(claim: ClaimRecord) : any {
+    return JSON.parse(claim.values);
   }
 
   ngAfterViewInit(): void {

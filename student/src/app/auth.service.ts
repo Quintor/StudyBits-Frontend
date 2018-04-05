@@ -16,7 +16,7 @@ export class AuthService {
   constructor(private httpClient: HttpClient) { }
 
   login(user: Student): Observable<boolean> {
-    const params = new HttpParams().set('name', user.username);
+    const params = new HttpParams().set('name', user.userName);
 
     return this.httpClient.get<Student[]>(AppSettings.API_ENDPOINT + 'student', {params: params}).map((users) => {
       if (users.length === 0) {

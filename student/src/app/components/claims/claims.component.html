@@ -12,9 +12,9 @@
       <mat-cell *matCellDef="let element">{{ element.issuerDid }}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="myDid">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>My DID</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.myDid }}</mat-cell>
+    <ng-container matColumnDef="uniName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Issuing University</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.owner.originUniversity.name }}</mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -25,6 +25,6 @@
 
 <ng-template #tpl let-element>
   <div class="mat-row" [@detailExpand] style="overflow: hidden">
-    <pre>{{ element.values | json }}</pre>
+    <pre>{{ getValuesAsObject(element) | json }}</pre>
   </div>
 </ng-template>
