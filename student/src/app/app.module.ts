@@ -6,6 +6,7 @@ import {
 } from '@angular/router';
 import {
   MatButtonModule,
+  MatCardModule,
   MatCheckboxModule,
   MatDividerModule,
   MatIconModule,
@@ -117,6 +118,7 @@ const PRINT_BREAKPOINTS = [{
     BrowserModule,
     HttpClientModule,
     MatToolbarModule,
+    MatCardModule,
     MatMenuModule,
     MatSidenavModule,
     MatButtonModule,
