@@ -51,8 +51,16 @@ export class ClaimsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.claims = this.claimsService.getAllClaims();
-    this.dataSource = new MatTableDataSource(this.claims);
+    this.getClaims();
+  }
+
+  private getClaims() {
+    console.log("Getting claims...");
+    this.claimsService.getAllClaims(this.authService.currentUser.userName).subscribe((claimrecords) => {
+      console.log("Gotten claims!");
+      this.claims = claimrecords;
+      this.dataSource = new MatTableDataSource(this.claims);
+    });
   }
 
   ngAfterViewInit(): void {
@@ -63,6 +71,7 @@ export class ClaimsComponent implements OnInit {
     this.claimsService.refreshClaims(this.authService.currentUser.userName).subscribe((success) => {
       const message = success ? 'Getting claims succeeded' : 'Getting claims failed';
       this.snackBar.open(message, null, {duration: 1000});
+      this.getClaims();
     })
   }
 }
