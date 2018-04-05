@@ -6,6 +6,7 @@ import {
 import { ClaimsService } from '../../services/claims/claims.service';
 import { ClaimRecord } from '../../model/claimRecord';
 import {
+  MatSnackBar,
   MatSort,
   MatTableDataSource
 } from '@angular/material';
@@ -17,6 +18,7 @@ import {
   trigger
 } from '@angular/animations';
 import 'rxjs/add/observable/of';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-claims',
@@ -45,7 +47,7 @@ export class ClaimsComponent implements OnInit {
   // For sorting of the table columns
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor( private claimsService: ClaimsService ) {
+  constructor( private claimsService: ClaimsService , private authService: AuthService, private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -55,5 +57,12 @@ export class ClaimsComponent implements OnInit {
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
+  }
+
+  refreshClaims(): void {
+    this.claimsService.refreshClaims(this.authService.currentUser.userName).subscribe((success) => {
+      const message = success ? 'Getting claims succeeded' : 'Getting claims failed';
+      this.snackBar.open(message, null, {duration: 1000});
+    })
   }
 }
