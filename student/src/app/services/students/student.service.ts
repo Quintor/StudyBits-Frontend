@@ -15,7 +15,7 @@ export class StudentService {
   }
 
   onboard(student: Student, university: University) : Observable<boolean> {
-    let params = new HttpParams().set("student", student.id.toString()).set("university", university.id.toString());
+    let params = new HttpParams().set("studentUserName", student.userName).set("universityName", university.name);
     console.log("Params:");
     console.log(params);
     return this.httpClient.post(AppSettings.API_ENDPOINT + "student/onboard", "", {params: params, observe: "response"})

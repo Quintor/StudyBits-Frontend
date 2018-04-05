@@ -10,7 +10,7 @@ export class ConnectionsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllConnections(studentId: number) : Observable<ConnectionRecord[]> {
-    return this.httpClient.get<ConnectionRecord[]>(AppSettings.API_ENDPOINT + `student/${studentId}/connections`)
+  getAllConnections(studentUsername: string) : Observable<ConnectionRecord[]> {
+    return this.httpClient.get<ConnectionRecord[]>(AppSettings.API_ENDPOINT + `student/${studentUsername}/connections`)
   }
 }

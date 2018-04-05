@@ -84,7 +84,7 @@ export class ConnectionsComponent implements OnInit {
   }
 
   private refreshConnections() : void {
-    this.connectionsService.getAllConnections(this.authService.currentUser.id).subscribe(connections => {
+    this.connectionsService.getAllConnections(this.authService.currentUser.userName).subscribe(connections => {
       this.connections = connections;
       this.dataSource = new MatTableDataSource(this.connections);
     });
