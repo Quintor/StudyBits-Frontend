@@ -3,6 +3,7 @@ import {
   NavigationEnd,
   Router
 } from '@angular/router';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-top-menu',
@@ -13,7 +14,7 @@ export class TopMenuComponent implements OnInit {
 
   private path: string;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
     this.subscribeForNavigationEvents();
@@ -26,6 +27,10 @@ export class TopMenuComponent implements OnInit {
         this.path = newPath.charAt(0).toUpperCase() + newPath.slice(1);
       }
     });
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 
 

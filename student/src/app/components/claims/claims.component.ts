@@ -28,7 +28,7 @@ import { AuthService } from '../../services/auth/auth.service';
 export class ClaimsComponent implements OnInit {
   claims: ClaimRecord[];
   dataSource: MatTableDataSource<any>;
-  displayedColumns = ['id', 'issuerDid', 'myDid'];
+  displayedColumns = ['id', 'issuerDid', 'uniName'];
 
   // For sorting of the table columns
   @ViewChild(MatSort) sort: MatSort;
@@ -41,12 +41,16 @@ export class ClaimsComponent implements OnInit {
   }
 
   private getClaims() {
-    console.log("Getting claims...");
+    console.log('Getting claims...');
     this.claimsService.getAllClaims(this.authService.currentUser.userName).subscribe((claimrecords) => {
-      console.log("Gotten claims!");
+      console.log('Gotten claims!');
       this.claims = claimrecords;
       this.dataSource = new MatTableDataSource(this.claims);
     });
+  }
+
+  private getValuesAsObject(claim: ClaimRecord): any {
+    return JSON.parse(claim.values);
   }
 
   ngAfterViewInit(): void {
@@ -58,6 +62,6 @@ export class ClaimsComponent implements OnInit {
       const message = success ? 'Getting claims succeeded' : 'Getting claims failed';
       this.snackBar.open(message, null, {duration: 1000});
       this.getClaims();
-    })
+    });
   }
 }
