@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Student } from '../../model/student';
+import { University } from '../../model/university';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 
@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  user: Student = {userName: '', id: 0};
+  user: University = new University(0, 'rug');
   failedLogin = false;
 
   constructor(private authService: AuthService, private router: Router) {}

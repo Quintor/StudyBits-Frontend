@@ -1,9 +1,14 @@
-<form (submit)="login()">
-  <mat-form-field>
-    <input name="username" type="text" [(ngModel)]="user.username" placeholder="username" matInput/>
-  </mat-form-field>
-  <mat-form-field>
-    <input name="password" placeholder="password" type="password" matInput/>
-  </mat-form-field>
-  <button type="submit" mat-button>Log in</button>
-</form>
+<mat-card id="login-card">
+  <mat-card-header>Welcome to StudyBits!</mat-card-header>
+  <mat-card-content>
+    <form (submit)="login()">
+      <mat-form-field>
+        <input name="username" type="text" [(ngModel)]="user.name" placeholder="username" matInput/>
+      </mat-form-field>
+      <mat-form-field>
+        <input name="password" placeholder="password" type="password" matInput/>
+      </mat-form-field>
+      <button type="submit" mat-button>Log in</button>
+    </form>
+  </mat-card-content>
+</mat-card>

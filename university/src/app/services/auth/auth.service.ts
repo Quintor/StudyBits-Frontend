@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Student } from '../../model/student';
+import { University } from '../../model/university';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/map';
@@ -10,15 +10,15 @@ import { AppSettings } from '../../app.settings';
 export class AuthService {
   isLoggedIn = false;
   redirectUrl: string;
-  currentUser: Student;
+  currentUser: University;
 
   constructor(private httpClient: HttpClient) {
   }
 
-  login(user: Student): Observable<boolean> {
-    const params = new HttpParams().set('name', user.userName);
+  login(user: University): Observable<boolean> {
+    const params = new HttpParams().set('name', user.name);
 
-    return this.httpClient.get<Student[]>(AppSettings.API_ENDPOINT + 'student', {params: params}).map((users) => {
+    return this.httpClient.get<University[]>(AppSettings.API_ENDPOINT + 'student', {params: params}).map((users) => {
       if (users.length === 0) {
         return false;
       }

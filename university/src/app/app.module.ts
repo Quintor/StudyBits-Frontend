@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
   MatButtonModule,
+  MatCardModule,
   MatCheckboxModule,
   MatDialogModule,
   MatDividerModule,
@@ -27,6 +28,11 @@ import { ConnectionsComponent } from './components/connections/connections.compo
 import { StudentsComponent } from './components/students/students.component';
 import { ClaimsComponent } from './components/claims/claims.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { LoginComponent } from './components/login/login.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { AuthGuardService } from '../../../student/src/app/services/auth-guard/auth-guard.service';
 
 const appRoutes: Routes = [
   {
@@ -35,20 +41,28 @@ const appRoutes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'claims',
-    component: ClaimsComponent
-  },
-  {
-    path: 'connections',
-    component: ConnectionsComponent
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'claims',
+    component: ClaimsComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'connections',
+    component: ConnectionsComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'students',
-    component: StudentsComponent
+    component: StudentsComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: '**',
@@ -71,25 +85,30 @@ const PRINT_BREAKPOINTS = [{
     ConnectionsComponent,
     StudentsComponent,
     ClaimsComponent,
+    LoginComponent,
     PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatDividerModule,
-    MatIconModule,
+    HttpClientModule,
+    MatToolbarModule,
+    MatCardModule,
     MatMenuModule,
     MatSidenavModule,
-    MatSortModule,
-    MatTableModule,
-    MatToolbarModule,
-    MatFormFieldModule,
-    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
     MatSelectModule,
-    MatDialogModule,
+    MatInputModule,
     MatSnackBarModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatSortModule,
+    MatFormFieldModule,
     FlexLayoutModule,
+    MatDividerModule,
+    FormsModule,
     RouterModule.forRoot(
       appRoutes,
       {enableTracing: false}
