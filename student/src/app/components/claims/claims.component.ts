@@ -42,7 +42,7 @@ import { AuthService } from '../../auth.service';
 export class ClaimsComponent implements OnInit {
   claims: ClaimRecord[];
   dataSource: MatTableDataSource<any>;
-  displayedColumns = ['id', 'issuerDid', 'uniName'];
+  displayedColumns = ['id', 'issuerDid', 'universityName'];
 
   // For sorting of the table columns
   @ViewChild(MatSort) sort: MatSort;

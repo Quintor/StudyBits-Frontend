@@ -47,7 +47,7 @@ import {StudentService} from '../../services/students/student.service';
 export class ConnectionsComponent implements OnInit {
   connections: ConnectionRecord[];
   dataSource: MatTableDataSource<any>;
-  displayedColumns = ['id', 'student', 'university'];
+  displayedColumns = ['id', 'userName', 'universityName'];
 
   universities: University[];
 

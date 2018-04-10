@@ -12,9 +12,9 @@
       <mat-cell *matCellDef="let element">{{ element.issuerDid }}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="uniName">
+    <ng-container matColumnDef="universityName">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Issuing University</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.owner.originUniversity.name }}</mat-cell>
+      <mat-cell *matCellDef="let element">{{ element.universityName }}</mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
