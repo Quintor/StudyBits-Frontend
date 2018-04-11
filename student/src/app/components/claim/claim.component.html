@@ -14,7 +14,7 @@
 
     <ng-container matColumnDef="issuingUniversityName">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Issuing University</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.issuingUniversityName }}</mat-cell>
+      <mat-cell *matCellDef="let element">{{ element.issuingUniversityName | titlecase }}</mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

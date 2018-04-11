@@ -17,12 +17,9 @@ export class UniversityService {
   fetchUniversities() {
     this.httpClient.get<University[]>(AppSettings.API_ENDPOINT + '/university')
       .subscribe((universities) => {
-        while (this.universities.length > 0) {
-          this.universities.pop();
-        }
-        for (let university of universities) {
-          this.universities.push(university);
-        }
+        this.universities = [];
+        this.universities.push.apply(this.universities, universities);
+        this.observableUniversities.next(this.universities);
       });
   }
 

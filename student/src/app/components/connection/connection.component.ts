@@ -46,6 +46,7 @@ export class ConnectionComponent implements OnInit {
       (connections) => this.setDataSource(connections)
     );
     this.connectionService.fetchConnections();
+    this.universityService.fetchUniversities();
   }
 
   private setDataSource(connections: Array<ConnectionRecord>) {

@@ -2,7 +2,7 @@
 <mat-dialog-content>
   <mat-form-field>
     <mat-select [(value)]="selected" placeholder="University">
-      <mat-option *ngFor="let university of data.universities" [value]="university">{{university.name}}</mat-option>
+      <mat-option *ngFor="let university of data.universities" [value]="university">{{university.name | titlecase }}</mat-option>
     </mat-select>
   </mat-form-field>
 </mat-dialog-content>
