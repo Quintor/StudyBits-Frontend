@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  user: Student = {userName: '', id: 0};
+  user: Student = new Student()
   failedLogin = false;
 
   constructor(private authService: AuthService, private router: Router) {}
