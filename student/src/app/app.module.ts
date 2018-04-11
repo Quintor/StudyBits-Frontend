@@ -42,6 +42,7 @@ import { AuthService } from './services/auth/auth.service';
 import { CreateDialogComponent } from './components/connection/create-dialog/create-dialog.component';
 import { UniversityService } from './services/universities/university.service';
 import { StudentService } from './services/student/student.service';
+import { ProofRequestService } from './services/proof-requests/proof-request.service';
 
 
 const appRoutes: Routes = [
@@ -147,7 +148,8 @@ const PRINT_BREAKPOINTS = [{
     ConnectionService,
     ProfileService,
     StudentService,
-    UniversityService
+    UniversityService,
+    ProofRequestService
   ],
   bootstrap: [RootComponent]
 })
