@@ -6,14 +6,14 @@
       <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="student">
+    <ng-container matColumnDef="userName">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Student</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.student.userName }}</mat-cell>
+      <mat-cell *matCellDef="let element">{{ element.userName }}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="university">
+    <ng-container matColumnDef="universityName">
       <mat-header-cell *matHeaderCellDef mat-sort-header>University</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.university.name }}</mat-cell>
+      <mat-cell *matCellDef="let element">{{ element.universityName }}</mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
