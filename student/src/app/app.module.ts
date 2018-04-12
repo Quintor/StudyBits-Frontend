@@ -1,51 +1,49 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {
-  RouterModule,
-  Routes
-} from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import {
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
+  MatDialogModule,
   MatDividerModule,
+  MatFormFieldModule,
   MatIconModule,
+  MatInputModule,
   MatMenuModule,
+  MatSelectModule,
   MatSidenavModule,
+  MatSnackBarModule,
   MatSortModule,
   MatTableModule,
   MatToolbarModule,
-  MatFormFieldModule, MatInput, MatInputModule, MatSelectModule,
-  MatDialogModule,
-  MatSnackBarModule,
 } from '@angular/material';
-import {
-  BREAKPOINTS,
-  FlexLayoutModule
-} from '@angular/flex-layout';
+import { BREAKPOINTS, FlexLayoutModule } from '@angular/flex-layout';
 
 import { TopMenuComponent } from './components/top-menu/top-menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ClaimsComponent } from './components/claims/claims.component';
-import { ConnectionsComponent } from './components/connections/connections.component';
+import { ClaimComponent } from './components/claim/claim.component';
+import { ConnectionComponent } from './components/connection/connection.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RootComponent } from './components/root/root.component';
 
-import { ClaimsService } from './services/claims/claims.service';
-import { ConnectionsService } from './services/connections/connections.service';
+import { ClaimService } from './services/claim/claim.service';
+import { ConnectionService } from './services/connection/connection.service';
 import { ProfileService } from './services/profile/profile.service';
 import { DetailRowDirective } from './directives/detail-row/detail-row.directive';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule} from '@angular/forms';
-import { LoginComponent } from './login/login.component';
-import {AuthGuardService} from './auth-guard.service';
-import {AuthService} from './auth.service';
-import { CreateDialogComponent } from './components/connections/create-dialog/create-dialog.component';
-import {UniversityService} from './services/universities/university.service';
-import {StudentService} from './services/students/student.service';
+import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuardService } from './services/auth-guard/auth-guard.service';
+import { AuthService } from './services/auth/auth.service';
+import { CreateDialogComponent } from './components/connection/create-dialog/create-dialog.component';
+import { UniversityService } from './services/universities/university.service';
+import { StudentService } from './services/student/student.service';
+import { ProofRequestService } from './services/proof-requests/proof-request.service';
+import { ProofRequestComponent } from './components/proof-request/proof-request.component';
 
 
 const appRoutes: Routes = [
@@ -65,12 +63,17 @@ const appRoutes: Routes = [
   },
   {
     path: 'claims',
-    component: ClaimsComponent,
+    component: ClaimComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'proof-requests',
+    component: ProofRequestComponent,
     canActivate: [AuthGuardService]
   },
   {
     path: 'connections',
-    component: ConnectionsComponent,
+    component: ConnectionComponent,
     canActivate: [AuthGuardService]
   },
   {
@@ -100,8 +103,8 @@ const PRINT_BREAKPOINTS = [{
 @NgModule({
   declarations: [
     TopMenuComponent,
-    ClaimsComponent,
-    ConnectionsComponent,
+    ClaimComponent,
+    ConnectionComponent,
     ProfileComponent,
     SettingsComponent,
     DashboardComponent,
@@ -109,7 +112,8 @@ const PRINT_BREAKPOINTS = [{
     DetailRowDirective,
     PageNotFoundComponent,
     LoginComponent,
-    CreateDialogComponent
+    CreateDialogComponent,
+    ProofRequestComponent,
   ],
   entryComponents: [
     CreateDialogComponent
@@ -147,11 +151,12 @@ const PRINT_BREAKPOINTS = [{
     },
     AuthService,
     AuthGuardService,
-    ClaimsService,
-    ConnectionsService,
+    ClaimService,
+    ConnectionService,
     ProfileService,
     StudentService,
-    UniversityService
+    UniversityService,
+    ProofRequestService
   ],
   bootstrap: [RootComponent]
 })

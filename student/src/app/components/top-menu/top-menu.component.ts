@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  NavigationEnd,
-  Router
-} from '@angular/router';
-import { AuthService } from '../../auth.service';
+import { NavigationEnd, Router } from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-top-menu',
@@ -32,7 +29,4 @@ export class TopMenuComponent implements OnInit {
   logout(): void {
     this.authService.logout();
   }
-
-
-
 }
