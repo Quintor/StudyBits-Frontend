@@ -5,6 +5,7 @@ import {
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
+  MatChipsModule,
   MatDialogModule,
   MatDividerModule,
   MatFormFieldModule,
@@ -144,6 +145,7 @@ const PRINT_BREAKPOINTS = [{
     MatDividerModule,
     FormsModule,
     MatProgressBarModule,
+    MatChipsModule,
     RouterModule.forRoot(
       appRoutes,
       {enableTracing: false}

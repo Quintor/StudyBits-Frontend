@@ -57,11 +57,11 @@ export class ProofRequestService {
 
   accept(proofRequest: ProofRequest): Observable<boolean> {
     this.progress.inProgress(true);
-    const httpOptions = {
-        headers: new HttpHeaders({'Content-Type': 'application/json'}),
-    };
 
-    return this.httpClient.post(this.getBaseUri(), JSON.stringify(proofRequest), httpOptions).map((res: HttpResponse<boolean>) => {
+    return this.httpClient.post<any>(this.getBaseUri(), JSON.stringify(proofRequest), {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}),
+      observe: 'response'
+    }).map((res: HttpResponse<boolean>) => {
       this.progress.inProgress(false);
       let msg = res.status == 200 ? 'Successfully accepted proof request.' : ('Could not accept proof request. ' + res);
       console.log(msg);

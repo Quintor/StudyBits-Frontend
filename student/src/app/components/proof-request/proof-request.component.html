@@ -32,7 +32,14 @@
 
 <ng-template #tpl let-element>
   <div class="mat-row" [@detailExpand] style="overflow: hidden">
-    <button mat-raised-button (click)="accept(element)">Accept</button>
-    <button mat-raised-button color="warn">Decline</button>
+    <div id="proof-request-info">
+      <mat-chip-list>
+        <mat-chip *ngFor="let attribute of element.attributes">{{ attribute }}</mat-chip>
+      </mat-chip-list>
+    </div>
+    <div id="proof-request-buttons">
+      <button mat-raised-button (click)="accept(element)" color="primary">Accept</button>
+      <button mat-raised-button color="warn">Decline</button>
+    </div>
   </div>
 </ng-template>
