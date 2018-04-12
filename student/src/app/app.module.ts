@@ -43,6 +43,7 @@ import { CreateDialogComponent } from './components/connection/create-dialog/cre
 import { UniversityService } from './services/universities/university.service';
 import { StudentService } from './services/student/student.service';
 import { ProofRequestService } from './services/proof-requests/proof-request.service';
+import { ProofRequestComponent } from './components/proof-request/proof-request.component';
 
 
 const appRoutes: Routes = [
@@ -63,6 +64,11 @@ const appRoutes: Routes = [
   {
     path: 'claims',
     component: ClaimComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'proof-requests',
+    component: ProofRequestComponent,
     canActivate: [AuthGuardService]
   },
   {
@@ -106,7 +112,8 @@ const PRINT_BREAKPOINTS = [{
     DetailRowDirective,
     PageNotFoundComponent,
     LoginComponent,
-    CreateDialogComponent
+    CreateDialogComponent,
+    ProofRequestComponent,
   ],
   entryComponents: [
     CreateDialogComponent

@@ -1,12 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ClaimService } from '../../services/claim/claim.service';
-import { ClaimRecord } from '../../model/claimRecord';
-import { MatSort, MatTableDataSource } from '@angular/material';
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import 'rxjs/add/observable/of';
 import { Subscription } from 'rxjs/Subscription';
-import { ProofRequestService } from '../../services/proof-requests/proof-request.service';
-import { ProofRequest } from '../../model/proofRequest';
+import { MatSort, MatTableDataSource } from '@angular/material';
+import { ClaimService } from '../../services/claim/claim.service';
+import { ClaimRecord } from '../../model/claimRecord';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-claims',
@@ -28,59 +26,36 @@ import { ProofRequest } from '../../model/proofRequest';
   ],
 })
 export class ClaimComponent implements OnInit {
-  claimSubscription: Subscription;
-  proofRequestSubscription: Subscription;
 
-  dataSourceRequests: MatTableDataSource<any>;
+  claimSubscription: Subscription;
+
   dataSource: MatTableDataSource<any>;
   displayedColumns = ['id', 'issuerDid', 'issuingUniversityName'];
-  displayedColumnsRequests = ['id', 'name', 'version', 'universityName'];
 
   // For sorting of the table columns
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private claimService: ClaimService, private proofRequestService: ProofRequestService) {
+  constructor(private claimService: ClaimService) {
   }
 
   ngOnInit(): void {
     this.claimSubscription = this.claimService.observableClaims.subscribe(
       (claims) => this.setDataSource(claims)
     );
-    this.proofRequestSubscription = this.proofRequestService.observableClaims.subscribe(
-      (proofRequests) => this.setRequestsDataSource(proofRequests)
-    );
-    this.fetchNewClaims();
-    this.fetchNewProofRequests();
+    this.update();
   }
 
   private setDataSource(claims: Array<ClaimRecord>) {
     this.dataSource = new MatTableDataSource<ClaimRecord>(claims);
   }
 
-  private setRequestsDataSource(proofRequests: Array<ProofRequest>) {
-    this.dataSourceRequests = new MatTableDataSource<ProofRequest>(proofRequests);
-  }
-
   update() {
-    this.fetchNewClaims();
-    this.fetchNewProofRequests();
-  }
-
-  fetchNewClaims() {
     this.claimService.fetchNewClaims().subscribe(success =>
         this.claimService.fetchClaims().subscribe(
           success =>
             console.debug('Fetched claims successfully.'),
           error => console.error('Could not fetch claims: ' + error.statusText)),
       error => console.error('Could not fetch new claims: ' + error.statusText));
-  }
-  fetchNewProofRequests() {
-    this.proofRequestService.fetchNewProofRequests().subscribe(success =>
-        this.proofRequestService.fetchProofRequests().subscribe(
-          success =>
-            console.debug('Fetched proof requests successfully.'),
-          error => console.error('Could not fetch proof requests: ' + error.statusText)),
-      error => console.error('Could not fetch new proof requests: ' + error.statusText));
   }
 
   private getElementAsJson(obj: any): any {

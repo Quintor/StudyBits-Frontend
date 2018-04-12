@@ -2,21 +2,26 @@
   <mat-icon>refresh</mat-icon>
 </button>
 
-<div id="claimTable" class="data-table mat-elevation-z5">
+<div id="requestTable" class="data-table mat-elevation-z5">
   <mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef mat-sort-header>id</mat-header-cell>
       <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="issuerDid">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Issuer DID</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.issuerDid }}</mat-cell>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Request Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="issuingUniversityName">
+    <ng-container matColumnDef="version">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Request Version</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.version }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="universityName">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Issuing University</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.issuingUniversityName | titlecase }}</mat-cell>
+      <mat-cell *matCellDef="let element">{{ element.universityName | titlecase }}</mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -27,7 +32,7 @@
 
 <ng-template #tpl let-element>
   <div class="mat-row" [@detailExpand] style="overflow: hidden">
-    <pre>{{ getElementAsJson(element.values) | json }}</pre>
+    <button mat-raised-button (click)="accept(element)">Accept</button>
+    <button mat-raised-button color="warn">Decline</button>
   </div>
 </ng-template>
-

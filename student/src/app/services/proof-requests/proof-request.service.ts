@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ProofRequest } from '../../model/proofRequest';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { AuthService } from '../auth/auth.service';
 import { AppSettings } from '../../app.settings';
 import { Observable } from 'rxjs/Observable';
@@ -10,10 +10,10 @@ import { Observable } from 'rxjs/Observable';
 export class ProofRequestService {
 
   private proofRequests: Array<ProofRequest> = [];
-  public observableClaims: BehaviorSubject<Array<ProofRequest>>;
+  public observableRequests: BehaviorSubject<Array<ProofRequest>>;
 
   constructor(private httpClient: HttpClient, private authService: AuthService) {
-    this.observableClaims = new BehaviorSubject<Array<ProofRequest>>(this.proofRequests);
+    this.observableRequests = new BehaviorSubject<Array<ProofRequest>>(this.proofRequests);
     this.fetchProofRequests();
   }
 
@@ -28,7 +28,7 @@ export class ProofRequestService {
         console.debug('Received proof requests: ' + JSON.stringify(proofRequests));
         this.proofRequests = [];
         this.proofRequests.push.apply(this.proofRequests, proofRequests);
-        this.observableClaims.next(this.proofRequests);
+        this.observableRequests.next(this.proofRequests);
         return true;
       }, error => {
         console.error('Could not fetch proof requests: ' + error);
@@ -46,5 +46,22 @@ export class ProofRequestService {
       console.debug('Successfully fetched new proof requests.');
       return true;
     });
+  }
+
+  accept(proofRequest: ProofRequest): Observable<boolean> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+        })
+    };
+    return this.httpClient.post(this.getBaseUri(), JSON.stringify(proofRequest), httpOptions).map((response: HttpResponse<boolean>) => {
+      if (response == null) {
+        console.error('Could not accept proof request. ' + response);
+        return false;
+      }
+      console.debug('Successfully accepted proof request.');
+      return true;
+      }
+    )
   }
 }
