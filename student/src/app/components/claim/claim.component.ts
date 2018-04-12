@@ -28,15 +28,13 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 export class ClaimComponent implements OnInit {
 
   claimSubscription: Subscription;
-
   dataSource: MatTableDataSource<any>;
   displayedColumns = ['id', 'issuerDid', 'issuingUniversityName'];
 
   // For sorting of the table columns
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private claimService: ClaimService) {
-  }
+  constructor(private claimService: ClaimService) {}
 
   ngOnInit(): void {
     this.claimSubscription = this.claimService.observableClaims.subscribe(
@@ -50,12 +48,13 @@ export class ClaimComponent implements OnInit {
   }
 
   update() {
-    this.claimService.fetchNewClaims().subscribe(success =>
-        this.claimService.fetchClaims().subscribe(
-          success =>
-            console.debug('Fetched claims successfully.'),
-          error => console.error('Could not fetch claims: ' + error.statusText)),
-      error => console.error('Could not fetch new claims: ' + error.statusText));
+    this.claimService.fetchNewClaims().subscribe(success => {
+      if (success) {
+        this.claimService.fetchClaims().subscribe(() => {});
+      } else {
+        console.error('Could not fetch new claims.');
+      }
+    });
   }
 
   private getElementAsJson(obj: any): any {

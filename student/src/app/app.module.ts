@@ -11,6 +11,7 @@ import {
   MatIconModule,
   MatInputModule,
   MatMenuModule,
+  MatProgressBarModule,
   MatSelectModule,
   MatSidenavModule,
   MatSnackBarModule,
@@ -44,6 +45,8 @@ import { UniversityService } from './services/universities/university.service';
 import { StudentService } from './services/student/student.service';
 import { ProofRequestService } from './services/proof-requests/proof-request.service';
 import { ProofRequestComponent } from './components/proof-request/proof-request.component';
+import { ProgressbarComponent } from './components/progress/progressbar/progressbar.component';
+import { ProgressService } from './services/progress/progress.service';
 
 
 const appRoutes: Routes = [
@@ -114,6 +117,7 @@ const PRINT_BREAKPOINTS = [{
     LoginComponent,
     CreateDialogComponent,
     ProofRequestComponent,
+    ProgressbarComponent,
   ],
   entryComponents: [
     CreateDialogComponent
@@ -139,6 +143,7 @@ const PRINT_BREAKPOINTS = [{
     FlexLayoutModule,
     MatDividerModule,
     FormsModule,
+    MatProgressBarModule,
     RouterModule.forRoot(
       appRoutes,
       {enableTracing: false}
@@ -156,7 +161,8 @@ const PRINT_BREAKPOINTS = [{
     ProfileService,
     StudentService,
     UniversityService,
-    ProofRequestService
+    ProofRequestService,
+    ProgressService,
   ],
   bootstrap: [RootComponent]
 })

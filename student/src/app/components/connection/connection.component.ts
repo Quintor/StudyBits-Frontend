@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatSort, MatTableDataSource } from '@angular/material';
 import { ConnectionRecord } from '../../model/connectionRecord';
 import { ConnectionService } from '../../services/connection/connection.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -38,7 +38,7 @@ export class ConnectionComponent implements OnInit {
   // For sorting of the table columns
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private connectionService: ConnectionService, private dialog: MatDialog, private snackBar: MatSnackBar, private universityService: UniversityService, private authService: AuthService, private studentService: StudentService) {
+  constructor(private connectionService: ConnectionService, private dialog: MatDialog, private universityService: UniversityService, private authService: AuthService, private studentService: StudentService) {
   }
 
   ngOnInit(): void {
@@ -62,8 +62,6 @@ export class ConnectionComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result != null) {
         this.studentService.connect(this.authService.currentUser, result).subscribe((result) => {
-            const message = result ? 'Onboarding succeeded' : 'Onboarding failed';
-            this.snackBar.open(message, null, {duration: 1000});
             this.connectionService.fetchConnections();
           }
         );
