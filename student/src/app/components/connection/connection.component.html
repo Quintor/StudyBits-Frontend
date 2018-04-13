@@ -11,7 +11,7 @@
 
     <ng-container matColumnDef="userName">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Student</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.userName }}</mat-cell>
+      <mat-cell *matCellDef="let element">{{ element.userName | titlecase }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="universityName">
