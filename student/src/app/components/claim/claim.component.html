@@ -21,8 +21,7 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" [detailRow]="row"
-             [detailRowTpl]="tpl"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" [detailRow]="row" [detailRowTpl]="tpl"></mat-row>
   </mat-table>
   <div class="no-data-row mat-caption" *ngIf="this.dataSource.data.length == 0">
     <span>No Claims available</span>
@@ -30,8 +29,21 @@
 </div>
 
 <ng-template #tpl let-element>
-  <div class="mat-row" [@detailExpand] style="overflow: hidden">
-    <pre>{{ getElementAsJson(element.values) | json }}</pre>
+  <div id="claimDetailTable" class="data-table data-table-detail" [@detailExpand] style="overflow: hidden">
+    <mat-table [dataSource]="parseValuesToObjects(element.values)">
+      <ng-container matColumnDef="key">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let claimValue"><span class="mat-body-strong">{{ claimValue.key }}</span></mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="value">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let claimValue"><span class="mat-body-1">{{ claimValue.value }}</span></mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['key', 'value']" style="display: none"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['key', 'value']" class="element-row"></mat-row>
+
+    </mat-table>
   </div>
 </ng-template>
 

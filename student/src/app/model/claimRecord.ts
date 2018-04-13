@@ -12,3 +12,4 @@ export class ClaimRecord {
   myDid: string;
   theirDid: string;
 }
+

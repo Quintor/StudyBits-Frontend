@@ -29,7 +29,9 @@
 
 <ng-template #tpl let-element>
   <div class="mat-row" [@detailExpand] style="overflow: hidden">
-    <pre>{{ {"did": element.did, "nonce": element.nonce} | json }}</pre>
+    <mat-chip-list>
+      <mat-chip class="mat-caption">Did: {{element.did}}</mat-chip>
+    </mat-chip-list>
   </div>
 </ng-template>
 

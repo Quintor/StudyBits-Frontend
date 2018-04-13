@@ -5,6 +5,7 @@ import { MatSort, MatTableDataSource } from '@angular/material';
 import { ClaimService } from '../../services/claim/claim.service';
 import { ClaimRecord } from '../../model/claimRecord';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { ClaimValue } from '../../model/claimValue';
 
 @Component({
   selector: 'app-claims',
@@ -57,7 +58,14 @@ export class ClaimComponent implements OnInit {
     });
   }
 
-  private getElementAsJson(obj: any): any {
-    return JSON.parse(obj);
+  parseValuesToObjects(obj: string): ClaimValue[] {
+    let asJSON = JSON.parse(obj);
+    let objects = [];
+
+    Object.keys(asJSON).forEach(key => {
+      objects.push(new ClaimValue(key, asJSON[key][0], asJSON[key][1]))
+    });
+
+    return objects;
   }
 }
