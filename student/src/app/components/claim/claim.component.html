@@ -24,6 +24,9 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" [detailRow]="row"
              [detailRowTpl]="tpl"></mat-row>
   </mat-table>
+  <div class="no-data-row mat-caption" *ngIf="this.dataSource.data.length == 0">
+    <span>No Claims available</span>
+  </div>
 </div>
 
 <ng-template #tpl let-element>
