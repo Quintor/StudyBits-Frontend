@@ -22,11 +22,16 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" [detailRow]="row" [detailRowTpl]="tpl"></mat-row>
   </mat-table>
+  <div class="no-data-row mat-caption" *ngIf="this.dataSource.data.length == 0">
+    <span>No Connections available</span>
+  </div>
 </div>
 
 <ng-template #tpl let-element>
   <div class="mat-row" [@detailExpand] style="overflow: hidden">
-    <pre>{{ {"did": element.did, "nonce": element.nonce} | json }}</pre>
+    <mat-chip-list>
+      <mat-chip class="mat-caption">Did: {{element.did}}</mat-chip>
+    </mat-chip-list>
   </div>
 </ng-template>
 

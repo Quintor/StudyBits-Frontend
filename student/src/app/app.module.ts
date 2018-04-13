@@ -11,6 +11,7 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
+  MatListModule,
   MatMenuModule,
   MatProgressBarModule,
   MatSelectModule,
@@ -146,6 +147,7 @@ const PRINT_BREAKPOINTS = [{
     FormsModule,
     MatProgressBarModule,
     MatChipsModule,
+    MatListModule,
     RouterModule.forRoot(
       appRoutes,
       {enableTracing: false}
