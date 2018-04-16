@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { MatSort, MatTableDataSource } from '@angular/material';
+import { MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ProofRequestService } from '../../services/proof-requests/proof-request.service';
 import { ProofRequest } from '../../model/proofRequest';
@@ -35,7 +35,7 @@ export class ProofRequestComponent implements OnInit {
   // For sorting of the table columns
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private proofRequestService: ProofRequestService, private claimService: ClaimService) {
+  constructor(private proofRequestService: ProofRequestService, private claimService: ClaimService, private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -64,8 +64,12 @@ export class ProofRequestComponent implements OnInit {
         success => {
           console.log('Accepted ProofRequest successfully.');
           this.update();
+          this.snackBar.open("Successfully sent proof!", null, {duration: 3000});
         },
-        error => console.error('Could not accept proof request: ' + JSON.stringify(error))
+        error => {
+          this.snackBar.open("Failed to send proof.", null, {duration: 1000});
+          console.error('Could not accept proof request: ' + JSON.stringify(error))
+        }
       );
     });
   }
