@@ -9,14 +9,22 @@
       <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="userName">
+    <ng-container matColumnDef="studentUserName">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Student</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.userName | titlecase }}</mat-cell>
+      <mat-cell *matCellDef="let element">{{ element.studentUserName | titlecase }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="universityName">
       <mat-header-cell *matHeaderCellDef mat-sort-header>University</mat-header-cell>
       <mat-cell *matCellDef="let element">{{ element.universityName | titlecase }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="confirmed">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Confirmed</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-icon class="color-green" *ngIf="element.confirmed">check_circle</mat-icon>
+        <mat-icon class="color-red" *ngIf="!element.confirmed">error</mat-icon>
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

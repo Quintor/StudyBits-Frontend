@@ -3,6 +3,7 @@ export class ConnectionRecord {
   did: string;
   nonce: string;
   role: string;
-  userName: string;
+  confirmed: boolean;
+  studentUserName: string;
   universityName: string;
 }

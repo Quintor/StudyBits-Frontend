@@ -33,7 +33,7 @@ export class ConnectionComponent implements OnInit {
   connectionSubscription: Subscription;
 
   dataSource: MatTableDataSource<any>;
-  displayedColumns = ['id', 'userName', 'universityName'];
+  displayedColumns = ['id', 'studentUserName', 'universityName', 'confirmed'];
 
   // For sorting of the table columns
   @ViewChild(MatSort) sort: MatSort;

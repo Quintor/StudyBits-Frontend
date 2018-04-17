@@ -5,4 +5,7 @@
 img {
   height: 65%;
   margin-right: 15px;
+  background: white;
+  padding: 7px;
+  border-radius: 7px;
 }
