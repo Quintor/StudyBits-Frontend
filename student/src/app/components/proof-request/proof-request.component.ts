@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
-import { MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component, OnInit } from '@angular/core';
 import { ProofRequestService } from '../../services/proof-requests/proof-request.service';
 import { ProofRequest } from '../../model/proofRequest';
+import { MatSnackBar, MatTableDataSource } from '@angular/material';
+import { Subscription } from 'rxjs/Subscription';
 import { ClaimService } from '../../services/claim/claim.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-proof-request',
@@ -28,34 +28,20 @@ import { ClaimService } from '../../services/claim/claim.service';
 export class ProofRequestComponent implements OnInit {
 
   proofRequestSubscription: Subscription;
-
   dataSource: MatTableDataSource<ProofRequest>;
-  displayedColumns = ['id', 'name', 'version', 'universityName'];
+  displayedColumns = ['id', 'name', 'version', 'universityName', 'reviewed'];
 
-  // For sorting of the table columns
-  @ViewChild(MatSort) sort: MatSort;
-
-  constructor(private proofRequestService: ProofRequestService, private claimService: ClaimService, private snackBar: MatSnackBar) {
-  }
+  constructor(private claimService: ClaimService, private proofRequestService: ProofRequestService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.proofRequestSubscription = this.proofRequestService.observableRequests.subscribe(
       (proofRequests) => this.setDataSource(proofRequests)
     );
-    this.update();
+    this.proofRequestService.update();
   }
 
   private setDataSource(proofRequests: Array<ProofRequest>) {
     this.dataSource = new MatTableDataSource<ProofRequest>(proofRequests);
-  }
-
-  update() {
-    this.proofRequestService.fetchNewProofRequests().subscribe(success =>
-        this.proofRequestService.fetchProofRequests().subscribe(
-          success =>
-            console.debug('Fetched proof requests successfully.'),
-          error => console.error('Could not fetch proof requests: ' + error.statusText)),
-      error => console.error('Could not fetch new proof requests: ' + error.statusText));
   }
 
   accept(element: ProofRequest) {
@@ -63,7 +49,7 @@ export class ProofRequestComponent implements OnInit {
       this.proofRequestService.accept(element).subscribe(
         success => {
           console.log('Accepted ProofRequest successfully.');
-          this.update();
+          this.proofRequestService.update();
           this.snackBar.open("Successfully sent proof!", null, {duration: 3000});
         },
         error => {
@@ -72,10 +58,6 @@ export class ProofRequestComponent implements OnInit {
         }
       );
     });
-  }
-
-  private getElementAsJson(obj: any): any {
-    return JSON.parse(obj);
   }
 
 }

@@ -148,10 +148,7 @@ const PRINT_BREAKPOINTS = [{
     MatProgressBarModule,
     MatChipsModule,
     MatListModule,
-    RouterModule.forRoot(
-      appRoutes,
-      {enableTracing: false}
-    )
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [
     {

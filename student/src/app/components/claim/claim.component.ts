@@ -30,7 +30,7 @@ export class ClaimComponent implements OnInit {
 
   claimSubscription: Subscription;
   dataSource: MatTableDataSource<any>;
-  displayedColumns = ['id', 'issuerDid', 'issuingUniversityName'];
+  displayedColumns = ['label', 'schemaKeyName', 'issuingUniversityName'];
 
   // For sorting of the table columns
   @ViewChild(MatSort) sort: MatSort;

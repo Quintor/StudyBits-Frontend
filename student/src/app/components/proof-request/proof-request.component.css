@@ -1,8 +1,17 @@
 #refresh-claims {
-  float: right;
-  margin: 5px;
+  position: absolute;
+  right: 10px;
+  margin-top: 5px;
 }
 
 #proof-request-buttons {
   margin-left: auto;
+}
+
+.chip-green {
+  background: lime;
+}
+
+.chip-red {
+  background: red;
 }

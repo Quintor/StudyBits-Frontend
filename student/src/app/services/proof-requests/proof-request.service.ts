@@ -55,6 +55,14 @@ export class ProofRequestService {
     });
   }
 
+  update() {
+    this.fetchNewProofRequests().subscribe(success =>
+        this.fetchProofRequests().subscribe(
+          success => console.debug('Fetched proof requests successfully.'),
+          error => console.error('Could not fetch proof requests: ' + error.statusText)),
+      error => console.error('Could not fetch new proof requests: ' + error.statusText));
+  }
+
   accept(proofRequest: ProofRequest): Observable<boolean> {
     this.progress.inProgress(true);
 
