@@ -20,7 +20,7 @@
     </ng-container>
 
     <ng-container matColumnDef="confirmed">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Confirmed</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Identity confirmed</mat-header-cell>
       <mat-cell *matCellDef="let element">
         <mat-icon class="color-green" *ngIf="element.confirmed">check_circle</mat-icon>
         <mat-icon class="color-red" *ngIf="!element.confirmed">error</mat-icon>

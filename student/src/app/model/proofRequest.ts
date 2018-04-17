@@ -6,4 +6,5 @@ export class ProofRequest {
   link: string;
   name: string;
   version: string;
+  isReviewed: boolean;
 }

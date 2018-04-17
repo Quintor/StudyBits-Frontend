@@ -4,7 +4,7 @@
   <mat-icon>refresh</mat-icon>
 </button>
 
-<div id="requestTable" class="data-table mat-elevation-z5">
+<div class="data-table mat-elevation-z5">
   <mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef mat-sort-header>id</mat-header-cell>
@@ -24,6 +24,16 @@
     <ng-container matColumnDef="universityName">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Issuing University</mat-header-cell>
       <mat-cell *matCellDef="let element">{{ element.universityName | titlecase }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="reviewed">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-chip-list>
+          <mat-chip class="chip-green" *ngIf="!element.isReviewed">Open</mat-chip>
+          <mat-chip class="chip-red" *ngIf="element.isReviewed">Closed</mat-chip>
+        </mat-chip-list>
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -48,3 +58,4 @@
     </div>
   </div>
 </ng-template>
+
