@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Create a new Student Account</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <input matInput placeholder="Username" required [(value)]="student.userName">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="First Name" required [(value)]="student.firstName">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Last Name" required [(value)]="student.lastName">
+  </mat-form-field>
+  <mat-form-field hintLabel="Format: XXX-XX-XXXX" [(value)]="student.ssn">
+    <input matInput placeholder="SSN" required>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button [mat-dialog-close]="student" color="primary">Create</button>
+  <button mat-raised-button [mat-dialog-close]="null">Cancel</button>
+</mat-dialog-actions>

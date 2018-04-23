@@ -1,0 +1,35 @@
+<app-progressbar></app-progressbar>
+
+<button id="add-connection" mat-mini-fab (click)="openDialog()">
+  <mat-icon>add</mat-icon>
+</button>
+
+<div class="data-table mat-elevation-z5">
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="isOpen">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Connection ID</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.isOpen }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="attributes">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Student</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-chip-list>
+          <mat-chip *ngFor="let attribute of element.attr_names">{{ attribute }}</mat-chip>
+        </mat-chip-list>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" [detailRow]="row"
+             [detailRowTpl]="tpl"></mat-row>
+  </mat-table>
+  <div class="no-data-row mat-caption" *ngIf="this.dataSource.data.length == 0">
+    <span>No Positions available</span>
+  </div>
+</div>
+
+<ng-template #tpl let-element>
+  <div class="mat-row" [@detailExpand] style="overflow: hidden">
+  </div>
+</ng-template>

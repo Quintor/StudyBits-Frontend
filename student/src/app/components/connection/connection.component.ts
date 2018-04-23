@@ -56,7 +56,7 @@ export class ConnectionComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(CreateDialogComponent, {
       width: '250px',
-      data: {universities: this.universityService.getUniversities()}
+      data: {universities: this.universityService.universities}
     });
 
     dialogRef.afterClosed().subscribe(result => {

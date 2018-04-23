@@ -1,9 +1,9 @@
 export class University {
-  id: number;
-  name: string;
+  universityName: string;
+  userName: string;
 
-  constructor(id: number, name: string ) {
-    this.id = id;
-    this.name = name;
+  constructor(universityName: string, userName: string ) {
+    this.universityName = universityName;
+    this.userName = userName;
   }
 }

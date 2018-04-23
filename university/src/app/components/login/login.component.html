@@ -3,7 +3,10 @@
   <mat-card-content>
     <form (submit)="login()">
       <mat-form-field>
-        <input name="username" type="text" [(ngModel)]="user.name" placeholder="username" matInput/>
+        <input name="universityName" type="text" [(ngModel)]="user.universityName" placeholder="University" matInput/>
+      </mat-form-field>
+      <mat-form-field>
+        <input name="userName" type="text" [(ngModel)]="user.userName" placeholder="username" matInput/>
       </mat-form-field>
       <mat-form-field>
         <input name="password" placeholder="password" type="password" matInput/>

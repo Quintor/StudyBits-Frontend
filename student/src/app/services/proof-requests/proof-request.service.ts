@@ -15,14 +15,14 @@ export class ProofRequestService {
 
   constructor(private httpClient: HttpClient, private authService: AuthService, private progress: ProgressService) {
     this.observableRequests = new BehaviorSubject<Array<ProofRequest>>(this.proofRequests);
-    this.fetchProofRequests();
+    this.fetch();
   }
 
   getBaseUri(): string {
     return AppSettings.API_ENDPOINT + `student/${this.authService.currentUser.userName}/proof-requests/`;
   }
 
-  fetchProofRequests(): Observable<boolean> {
+  fetch(): Observable<boolean> {
     console.debug(this.getBaseUri());
 
     this.progress.inProgress(true);
@@ -42,7 +42,7 @@ export class ProofRequestService {
       });
   }
 
-  fetchNewProofRequests(): Observable<boolean> {
+  fetchNew(): Observable<boolean> {
     console.debug(this.getBaseUri() + 'new');
 
     this.progress.inProgress(true);
@@ -56,8 +56,8 @@ export class ProofRequestService {
   }
 
   update() {
-    this.fetchNewProofRequests().subscribe(success =>
-        this.fetchProofRequests().subscribe(
+    this.fetchNew().subscribe(success =>
+        this.fetch().subscribe(
           success => console.debug('Fetched proof requests successfully.'),
           error => console.error('Could not fetch proof requests: ' + error.statusText)),
       error => console.error('Could not fetch new proof requests: ' + error.statusText));

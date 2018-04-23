@@ -1,3 +1,33 @@
-<p>
-  students works!
-</p>
+<app-progressbar></app-progressbar>
+
+<button id="add-connection" mat-mini-fab (click)="openDialog()"><mat-icon>add</mat-icon></button>
+
+<div class="data-table mat-elevation-z5">
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="userName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Username</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.userName }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="firstName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>First Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.firstName | titlecase }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.lastName | titlecase }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ssn">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>SSN</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.ssn }}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row"></mat-row>
+  </mat-table>
+  <div class="no-data-row mat-caption" *ngIf="this.dataSource.data.length == 0">
+    <span>No Students available</span>
+  </div>
+</div>
