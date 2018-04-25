@@ -16,8 +16,14 @@ export class UniversityService {
   }
 
   fetchSchemaDefinitions() {
-    this.httpClient.get<Array<SchemaDefinition>>(this.getBaseUri() + '/schemas')
-      .subscribe(res => this.schemaDefinitions = res);
-  }
+    this.httpClient.get<Array<SchemaDefinition>>(this.getBaseUri() + '/schemas', {observe: 'response'})
+      .subscribe(res => {
+        if (res.status == 200) {
+          this.schemaDefinitions = res.body;
+        }
 
+        const msg = res.status == 200 ? 'Fetched SchemaDefinitions: ' : 'Error while fetching SchemaDefinitions: ';
+        console.log(msg + JSON.stringify(res));
+      });
+  }
 }

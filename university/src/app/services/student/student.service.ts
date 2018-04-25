@@ -18,34 +18,38 @@ export class StudentService {
   }
 
   private getBaseUri(): string {
-    return AppSettings.API_ENDPOINT + `${this.authService.currentUser.universityName}/admin/${this.authService.currentUser.userName}/students'}`;
+    return AppSettings.API_ENDPOINT + `${this.authService.currentUser.universityName}/admin/${this.authService.currentUser.userName}/students`;
   }
 
   fetchAll() {
     this.progress.inProgress(true);
-    this.httpClient.get<Student[]>(this.getBaseUri())
+
+    console.debug('Fetching students from: ' + this.getBaseUri());
+    this.httpClient.get<Array<Student>>(this.getBaseUri())
       .subscribe(
         students => {
+          console.debug('Received students: ' + JSON.stringify(students));
           this.students = [];
           this.students.push.apply(this.students, students);
           this.observableStudents.next(this.students);
         },
-        error => console.error('Could not fetch students: ' + JSON.stringify(error)),
+        error => console.error('Could not fetchAll students: ' + JSON.stringify(error)),
         () => this.progress.inProgress(false));
   }
 
   createNew(student: Student): Observable<boolean> {
     this.progress.inProgress(true);
-    const options = {
+
+    return this.httpClient.post<Student>(this.getBaseUri(), JSON.stringify(student), {
+      observe: 'response',
       headers: new HttpHeaders({'Content-Type': 'application/json'})
-    };
-
-    return this.httpClient.post<Student>(this.getBaseUri(), JSON.stringify(student), options)
+    })
       .map(res => {
-        let msg = res == null ? 'Created student successfully: ' : 'Could not create student: ';
+        let msg = res.status == 200 ? 'Created student successfully: ' : 'Could not create student: ';
         console.log(msg + JSON.stringify(res));
+        this.progress.inProgress(false);
 
-        return res == null;
+        return res.status == 200;
       });
   }
 

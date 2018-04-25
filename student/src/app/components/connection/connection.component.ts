@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
-import { ConnectionRecord } from '../../model/connectionRecord';
+import { Position } from '../../model/connectionRecord';
 import { ConnectionService } from '../../services/connection/connection.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CreateDialogComponent } from './create-dialog/create-dialog.component';
@@ -45,12 +45,12 @@ export class ConnectionComponent implements OnInit {
     this.connectionSubscription = this.connectionService.observableConnections.subscribe(
       (connections) => this.setDataSource(connections)
     );
-    this.connectionService.fetchConnections();
+    this.connectionService.fetchAll();
     this.universityService.fetchUniversities();
   }
 
-  private setDataSource(connections: Array<ConnectionRecord>) {
-    this.dataSource = new MatTableDataSource<ConnectionRecord>(connections);
+  private setDataSource(connections: Array<Position>) {
+    this.dataSource = new MatTableDataSource<Position>(connections);
   }
 
   openDialog(): void {
@@ -65,7 +65,7 @@ export class ConnectionComponent implements OnInit {
             const message = result ? 'Onboarding succeeded' : 'Onboarding failed';
             console.log(message);
             this.snackBar.open(message, null, {duration: 3000});
-            this.connectionService.fetchConnections();
+            this.connectionService.fetchAll();
           }
         );
         console.log(result);

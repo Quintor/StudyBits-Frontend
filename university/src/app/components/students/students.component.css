@@ -1,0 +1,11 @@
+#add-student {
+  position: absolute;
+  right: 5px;
+  margin-top: 5px;
+}
+
+#refresh-students {
+  position: absolute;
+  right: 50px;
+  margin-top: 5px;
+}

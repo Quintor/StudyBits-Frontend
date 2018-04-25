@@ -4,7 +4,7 @@ import { MatDialog, MatSnackBar, MatSort, MatTableDataSource } from '@angular/ma
 import { StudentService } from '../../services/student/student.service';
 import { Student } from '../../model/student';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { CreateDialogComponent } from './create-dialog/create-dialog.component';
+import { CreateStudentDialogComponent } from './create-student-dialog/create-student-dialog.component';
 
 @Component({
   selector: 'app-students',
@@ -34,7 +34,7 @@ export class StudentsComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private studentService: StudentService, private snackBar: MatSnackBar, private dialog: MatDialog) {
+  constructor(public studentService: StudentService, private snackBar: MatSnackBar, private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -49,8 +49,8 @@ export class StudentsComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(CreateDialogComponent, {
-      width: '250px'
+    const dialogRef = this.dialog.open(CreateStudentDialogComponent, {
+      width: '415px'
     });
 
     dialogRef.afterClosed().subscribe(student => {

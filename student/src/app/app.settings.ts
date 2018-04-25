@@ -1,3 +1,3 @@
 export class AppSettings {
-  public static API_ENDPOINT = window.location.origin + '/api/student/';
+  public static API_ENDPOINT = 'http://localhost:8095/';
 }

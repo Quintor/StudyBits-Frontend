@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Create a new Position</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-select [(value)]="selectedSchema">
+      <mat-option *ngFor="let schema of data.schemas" [value]="schema">{{schema.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngFor="let attribute of selectedSchema.attr_names">
+    <input matInput placeholder="{{attribute}}" (keyup)="setPositionAttribute(attribute, $event.target.value)">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button (click)="closeDialog(true)" color="primary">Create</button>
+  <button mat-raised-button (click)="closeDialog(false)">Cancel</button>
+</mat-dialog-actions>

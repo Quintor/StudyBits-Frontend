@@ -1,16 +1,16 @@
 <h2 mat-dialog-title>Create a new Student Account</h2>
 <mat-dialog-content>
   <mat-form-field>
-    <input matInput placeholder="Username" required [(value)]="student.userName">
+    <input matInput placeholder="Username" required [(ngModel)]="student.userName">
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="First Name" required [(value)]="student.firstName">
+    <input matInput placeholder="First Name" required [(ngModel)]="student.firstName">
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Last Name" required [(value)]="student.lastName">
+    <input matInput placeholder="Last Name" required [(ngModel)]="student.lastName">
   </mat-form-field>
-  <mat-form-field hintLabel="Format: XXX-XX-XXXX" [(value)]="student.ssn">
-    <input matInput placeholder="SSN" required>
+  <mat-form-field hintLabel="Format: XXX-XX-XXXX">
+    <input matInput placeholder="SSN" required [(ngModel)]="student.ssn">
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>

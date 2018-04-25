@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProofRequestService } from '../../services/proof-requests/proof-request.service';
-import { ProofRequest } from '../../model/proofRequest';
+import { Position } from '../../model/proofRequest';
 import { MatSnackBar, MatTableDataSource } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
 import { ClaimService } from '../../services/claim/claim.service';
@@ -28,7 +28,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 export class ProofRequestComponent implements OnInit {
 
   proofRequestSubscription: Subscription;
-  dataSource: MatTableDataSource<ProofRequest>;
+  dataSource: MatTableDataSource<Position>;
   displayedColumns = ['id', 'name', 'version', 'universityName', 'reviewed'];
 
   constructor(private claimService: ClaimService, private proofRequestService: ProofRequestService, private snackBar: MatSnackBar) { }
@@ -40,11 +40,11 @@ export class ProofRequestComponent implements OnInit {
     this.proofRequestService.update();
   }
 
-  private setDataSource(proofRequests: Array<ProofRequest>) {
-    this.dataSource = new MatTableDataSource<ProofRequest>(proofRequests);
+  private setDataSource(proofRequests: Array<Position>) {
+    this.dataSource = new MatTableDataSource<Position>(proofRequests);
   }
 
-  accept(element: ProofRequest) {
+  accept(element: Position) {
     this.claimService.fetchNewClaims().subscribe(success => {
       this.proofRequestService.accept(element).subscribe(
         success => {

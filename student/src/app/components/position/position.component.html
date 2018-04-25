@@ -1,29 +1,24 @@
 <app-progressbar></app-progressbar>
 
-<button id="add-position" mat-mini-fab (click)="openDialog()">
-  <mat-icon>add</mat-icon>
+<button id="refresh-claims" mat-mini-fab (click)="update()">
+  <mat-icon>refresh</mat-icon>
 </button>
 
 <div class="data-table mat-elevation-z5">
   <mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="universityName">
       <mat-header-cell *matHeaderCellDef mat-sort-header>University</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.universityName }}</mat-cell>
+      <mat-cell *matCellDef="let element">{{ element.universityName | titlecase }}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="isOpen">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Open</mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        <mat-icon *ngIf="element.isOpen">check_circle</mat-icon>
-        <mat-icon *ngIf="!element.isOpen">remove_circle</mat-icon>
-      </mat-cell>
+    <ng-container matColumnDef="state">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.state }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="attributes">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Attributes</mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        {{ element.attributes | json }}
-      </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Required Info</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.attributes | json }}</mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -36,9 +31,10 @@
 
 <ng-template #tpl let-element>
   <div class="mat-row" [@detailExpand] style="overflow: hidden">
-    <mat-chip-list>
-      <mat-chip>Schema Name: {{element.schemaName}}</mat-chip>
-      <mat-chip>Schema Version: {{element.schemaVersion}}</mat-chip>
-    </mat-chip-list>
+    <div id="proof-request-buttons">
+      <button mat-raised-button (click)="accept(element)" color="primary">Accept</button>
+      <button mat-raised-button color="warn">Decline</button>
+    </div>
   </div>
 </ng-template>
+

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { ProofRequest } from '../../model/proofRequest';
+import { Position } from '../../model/proofRequest';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { AuthService } from '../auth/auth.service';
 import { AppSettings } from '../../app.settings';
@@ -10,11 +10,11 @@ import { ProgressService } from '../progress/progress.service';
 @Injectable()
 export class ProofRequestService {
 
-  private proofRequests: Array<ProofRequest> = [];
-  public observableRequests: BehaviorSubject<Array<ProofRequest>>;
+  private proofRequests: Array<Position> = [];
+  public observableRequests: BehaviorSubject<Array<Position>>;
 
   constructor(private httpClient: HttpClient, private authService: AuthService, private progress: ProgressService) {
-    this.observableRequests = new BehaviorSubject<Array<ProofRequest>>(this.proofRequests);
+    this.observableRequests = new BehaviorSubject<Array<Position>>(this.proofRequests);
     this.fetch();
   }
 
@@ -26,7 +26,7 @@ export class ProofRequestService {
     console.debug(this.getBaseUri());
 
     this.progress.inProgress(true);
-    return this.httpClient.get<ProofRequest[]>(this.getBaseUri())
+    return this.httpClient.get<Position[]>(this.getBaseUri())
       .map((proofRequests) => {
         console.debug('Received proof requests: ' + JSON.stringify(proofRequests));
         this.proofRequests = [];
@@ -63,7 +63,7 @@ export class ProofRequestService {
       error => console.error('Could not fetch new proof requests: ' + error.statusText));
   }
 
-  accept(proofRequest: ProofRequest): Observable<boolean> {
+  accept(proofRequest: Position): Observable<boolean> {
     this.progress.inProgress(true);
 
     return this.httpClient.post<any>(this.getBaseUri(), JSON.stringify(proofRequest), {

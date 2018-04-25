@@ -16,18 +16,19 @@ export class AuthService {
   constructor(private httpClient: HttpClient, private router: Router) {}
 
   login(user: University): Observable<boolean> {
-    console.log('Logging in with user: ' + JSON.stringify(this.currentUser));
+    console.log('Logging in with user: ' + JSON.stringify(user));
 
-    return this.httpClient.get(AppSettings.API_ENDPOINT + `/${this.currentUser.universityName}/admin/${this.currentUser.userName}`, {observe: 'response'}).map((res) => {
-      if (res.status == 200) {
-        this.isLoggedIn = true;
-        console.log('Logged in with user: ' + JSON.stringify(this.currentUser));
-      } else {
-        console.error('Could not log in with user: ' + JSON.stringify(this.currentUser));
-      }
+    return this.httpClient.get<University>(AppSettings.API_ENDPOINT + `${user.universityName}/admin/${user.userName}`, {observe: 'response'})
+      .map(res => {
+        if (res.status == 200) {
+          this.isLoggedIn = true;
+          this.currentUser = user;
+        }
+        const msg = res.status == 200 ? 'Logged in with user: ' : 'Could not log in with user: ';
+        console.log(msg + JSON.stringify(user));
 
-      return res.status == 200;
-    });
+        return res.status == 200;
+      });
   }
 
   logout() {
