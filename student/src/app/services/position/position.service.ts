@@ -5,6 +5,7 @@ import { Position } from '../../model/position';
 import { HttpClient } from '@angular/common/http';
 import { ProgressService } from '../progress/progress.service';
 import { AuthService } from '../auth/auth.service';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class PositionService {
@@ -21,16 +22,28 @@ export class PositionService {
   }
 
   fetchAll() {
-    console.debug("Fetching positions from: " + this.getBaseUri());
+    console.debug('Fetching positions from: ' + this.getBaseUri());
 
     this.progress.inProgress(true);
     this.httpClient.get<Position[]>(this.getBaseUri())
       .subscribe((connections) => {
-        console.debug("Received positions: " + JSON.stringify(connections));
+        console.debug('Received positions: ' + JSON.stringify(connections));
         this.positions = [];
         this.positions.push.apply(this.positions, connections);
         this.observablePositions.next(this.positions);
         this.progress.inProgress(false);
+      });
+  }
+
+  fetchNew(): Observable<boolean> {
+    this.progress.inProgress(true);
+    return this.httpClient.get(this.getBaseUri() + '/new', {observe: 'response'})
+      .map(res => {
+        const msg = res.status == 200 ? 'Fetched new positions successfully: ' : 'Error while fetching new positions: ';
+        console.log(msg + JSON.stringify(res));
+        this.progress.inProgress(false);
+
+        return res.status == 200;
       });
   }
 

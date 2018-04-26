@@ -30,7 +30,7 @@ export class PositionComponent implements OnInit {
   dataSource: MatTableDataSource<Position>;
   displayedColumns = ['universityName', 'state', 'attributes'];
 
-  constructor(private positionService: PositionService, private snackBar: MatSnackBar) { }
+  constructor(public positionService: PositionService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.positionsSubscription = this.positionService.observablePositions.subscribe(
@@ -41,5 +41,12 @@ export class PositionComponent implements OnInit {
 
   private setDataSource(positions: Array<Position>) {
     this.dataSource = new MatTableDataSource<Position>(positions);
+  }
+
+  update() {
+    this.positionService.fetchNew().subscribe(
+      success => this.positionService.fetchAll(),
+      error => console.error('Error while fetching new positions.')
+    )
   }
 }
