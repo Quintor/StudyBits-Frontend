@@ -1,12 +1,16 @@
+import { SchemaDefinition } from './schemaDefinition';
+import { PositionState } from '../enums/PositionState';
+
 export class Position {
   universityName: string;
-  isOpen: boolean;
-  schemaName: string;
-  schemaVersion: string;
+  schemaDefinition: SchemaDefinition;
+  state: PositionState;
   attributes: Map<string, string>;
 
   constructor() {
-    this.isOpen = true;
+    this.schemaDefinition = new SchemaDefinition();
+    this.state = PositionState.OPEN;
     this.attributes = new Map();
   }
+
 }

@@ -38,7 +38,7 @@ export class PositionService {
         () => this.progress.inProgress(false));
   }
 
-  create(position): Observable<boolean> {
+  create(position: Position): Observable<boolean> {
     this.progress.inProgress(true);
     console.log('Creating position: ' + JSON.stringify(position));
 

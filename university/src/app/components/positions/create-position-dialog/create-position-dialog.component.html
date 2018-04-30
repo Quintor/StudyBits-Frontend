@@ -5,7 +5,7 @@
       <mat-option *ngFor="let schema of data.schemas" [value]="schema">{{schema.name}}</mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field *ngFor="let attribute of selectedSchema.attr_names">
+  <mat-form-field *ngFor="let attribute of selectedSchema.attrNames">
     <input matInput placeholder="{{attribute}}" (keyup)="setPositionAttribute(attribute, $event.target.value)">
   </mat-form-field>
 </mat-dialog-content>

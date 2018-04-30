@@ -24,8 +24,7 @@ export class CreatePositionDialogComponent {
   closeDialog(create: boolean) {
     if (create) {
       this.position.universityName = this.data.universityName;
-      this.position.schemaName = this.selectedSchema.name;
-      this.position.schemaVersion = this.selectedSchema.version;
+      this.position.schemaDefinition = this.selectedSchema;
       this.dialogRef.close(this.position);
     } else {
       this.dialogRef.close(null);
