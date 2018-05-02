@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
-import { SchemaDefinition } from '../../model/schemaDefinition';
+import { SchemaDefinitionRecord } from '../../model/schemaDefinition';
 import { HttpClient } from '@angular/common/http';
 import { AppSettings } from '../../app.settings';
 
 @Injectable()
 export class UniversityService {
 
-  schemaDefinitions: Array<SchemaDefinition> = [];
+  schemaDefinitions: Array<SchemaDefinitionRecord> = [];
 
   constructor(private authService: AuthService, private httpClient: HttpClient) { }
 
@@ -16,7 +16,7 @@ export class UniversityService {
   }
 
   fetchSchemaDefinitions() {
-    this.httpClient.get<Array<SchemaDefinition>>(this.getBaseUri() + '/schemas', {observe: 'response'})
+    this.httpClient.get<Array<SchemaDefinitionRecord>>(this.getBaseUri() + '/schemas', {observe: 'response'})
       .subscribe(res => {
         if (res.status == 200) {
           this.schemaDefinitions = res.body;
