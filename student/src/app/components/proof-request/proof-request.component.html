@@ -49,7 +49,7 @@
   <div class="mat-row" [@detailExpand] style="overflow: hidden">
     <div id="proof-request-info">
       <mat-chip-list>
-        <mat-chip *ngFor="let attribute of element.attributes">{{ attribute }}</mat-chip>
+        <mat-chip *ngFor="let attribute of element.attrNames">{{ attribute }}</mat-chip>
       </mat-chip-list>
     </div>
     <div id="proof-request-buttons">

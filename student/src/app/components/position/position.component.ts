@@ -49,4 +49,17 @@ export class PositionComponent implements OnInit {
       error => console.error('Error while fetching new positions.')
     )
   }
+
+  accept(position: Position) {
+    this.positionService.accept(position).subscribe(
+      success => {
+        this.snackBar.open('Application for Exchange Position successful');
+        this.positionService.fetchAll();
+      },
+      error => {
+        console.error('Error while applying for Exchange position.');
+        this.snackBar.open('Error while applying for Exchange position');
+      }
+    )
+  }
 }

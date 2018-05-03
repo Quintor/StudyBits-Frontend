@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AppSettings } from '../../app.settings';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Position } from '../../model/position';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ProgressService } from '../progress/progress.service';
 import { AuthService } from '../auth/auth.service';
 import { Observable } from 'rxjs/Observable';
@@ -45,6 +45,22 @@ export class PositionService {
 
         return res.status == 200;
       });
+  }
+
+  accept(position: Position): Observable<boolean> {
+    this.progress.inProgress(true);
+    console.log('Applying for position: ' + JSON.stringify(position));
+
+    return this.httpClient.post(this.getBaseUri(), position, {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}),
+      observe: 'response'
+    }).map(res => {
+      const msg = res.status == 200 ? 'Successfully applied for position ' : 'Error while applying for position: ';
+      console.log(msg + JSON.stringify(res));
+      this.progress.inProgress(false);
+
+      return res.status == 200;
+    })
   }
 
 }
