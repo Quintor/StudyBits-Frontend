@@ -1,6 +1,6 @@
 import { PositionState } from '../enums/PositionState';
 
-export class Position {
+export class ExchangePosition {
   universityName: string;
   isOpen: boolean;
   state: PositionState;

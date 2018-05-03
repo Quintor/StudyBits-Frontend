@@ -1,0 +1,35 @@
+<app-progressbar></app-progressbar>
+
+<button id="refresh-applications" mat-mini-fab (click)="update()">
+  <mat-icon>refresh</mat-icon>
+</button>
+
+<div class="data-table mat-elevation-z5">
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="universityName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>University</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.universityName | titlecase }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="state">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.state }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="positionAttributes">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Required Info</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.exchangePositionModel.attributes | json }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="proof">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Required Info</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.proof | json }}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row"></mat-row>
+  </mat-table>
+  <div class="no-data-row mat-caption" *ngIf="this.dataSource.data.length == 0">
+    <span>No Applications available</span>
+  </div>
+</div>

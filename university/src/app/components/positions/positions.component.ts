@@ -6,7 +6,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { CreatePositionDialogComponent } from './create-position-dialog/create-position-dialog.component';
 import { AuthService } from '../../services/auth/auth.service';
 import { UniversityService } from '../../services/university/university.service';
-import { Position } from '../../model/position';
+import { ExchangePosition } from '../../model/exchangePosition';
 
 @Component({
   selector: 'app-positions',
@@ -30,7 +30,7 @@ import { Position } from '../../model/position';
 export class PositionsComponent implements OnInit {
 
   positionSubscription: Subscription;
-  dataSource: MatTableDataSource<Position>;
+  dataSource: MatTableDataSource<ExchangePosition>;
   displayedColumns = ['universityName', 'isOpen', 'attributes'];
 
   constructor(private positionService: PositionService, private universityService: UniversityService, private authService: AuthService, private snackBar: MatSnackBar, private dialog: MatDialog) { }
@@ -43,15 +43,8 @@ export class PositionsComponent implements OnInit {
     this.universityService.fetchSchemaDefinitions();
   }
 
-  private setDataSource(positions: Array<Position>) {
-    this.dataSource = new MatTableDataSource<Position>(positions);
-  }
-
-  getKeys(obj) {
-    let map = <Map<string, string>> obj;
-
-    console.log(map);
-    return Array.from(map.keys());
+  private setDataSource(positions: Array<ExchangePosition>) {
+    this.dataSource = new MatTableDataSource<ExchangePosition>(positions);
   }
 
   openDialog(): void {

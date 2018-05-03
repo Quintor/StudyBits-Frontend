@@ -1,3 +1,44 @@
-<p>
-  applications works!
-</p>
+<app-progressbar></app-progressbar>
+
+<div class="data-table mat-elevation-z5">
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="universityName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>University</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.universityName }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="state">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Open</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.state }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="positionAttributes">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Attributes</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.exchangePositionModel.attributes | json }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="proof">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Attributes</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.proof | json }}
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" [detailRow]="row" [detailRowTpl]="tpl"></mat-row>
+  </mat-table>
+  <div class="no-data-row mat-caption" *ngIf="this.dataSource.data.length == 0">
+    <span>No Applications available</span>
+  </div>
+</div>
+
+<ng-template #tpl let-element>
+  <div class="mat-row" [@detailExpand] style="overflow: hidden">
+    <div id="application-buttons">
+      <button mat-raised-button (click)="accept(element)" color="primary">Accept</button>
+      <button mat-raised-button color="warn">Decline</button>
+    </div>
+  </div>
+</ng-template>

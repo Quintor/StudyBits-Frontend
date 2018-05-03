@@ -32,6 +32,7 @@ import { ProgressbarComponent } from './components/progress/progressbar/progress
 import { ProgressService } from './services/progress/progress.service';
 import { PositionComponent } from './components/position/position.component';
 import { PositionService } from './services/position/position.service';
+import { ApplicationComponent } from './components/application/application.component';
 
 
 const appRoutes: Routes = [
@@ -99,6 +100,7 @@ const PRINT_BREAKPOINTS = [{
     ProofRequestComponent,
     ProgressbarComponent,
     PositionComponent,
+    ApplicationComponent,
   ],
   entryComponents: [
     CreateDialogComponent

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar, MatTableDataSource } from '@angular/material';
-import { Position } from '../../model/position';
+import { ExchangePosition } from '../../model/exchangePosition';
 import { Subscription } from 'rxjs/Subscription';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { PositionService } from '../../services/position/position.service';
@@ -27,7 +27,7 @@ import { PositionService } from '../../services/position/position.service';
 export class PositionComponent implements OnInit {
 
   positionsSubscription: Subscription;
-  dataSource: MatTableDataSource<Position>;
+  dataSource: MatTableDataSource<ExchangePosition>;
   displayedColumns = ['universityName', 'state', 'attributes'];
 
   constructor(public positionService: PositionService, private snackBar: MatSnackBar) { }
@@ -39,8 +39,8 @@ export class PositionComponent implements OnInit {
     this.positionService.fetchAll();
   }
 
-  private setDataSource(positions: Array<Position>) {
-    this.dataSource = new MatTableDataSource<Position>(positions);
+  private setDataSource(positions: Array<ExchangePosition>) {
+    this.dataSource = new MatTableDataSource<ExchangePosition>(positions);
   }
 
   update() {
@@ -50,7 +50,7 @@ export class PositionComponent implements OnInit {
     )
   }
 
-  accept(position: Position) {
+  accept(position: ExchangePosition) {
     this.positionService.accept(position).subscribe(
       success => {
         this.snackBar.open('Application for Exchange Position successful');

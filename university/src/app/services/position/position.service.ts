@@ -6,16 +6,16 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { UniversityService } from '../university/university.service';
 import { ProgressService } from '../progress/progress.service';
 import { Observable } from 'rxjs/Observable';
-import { Position } from '../../model/position';
+import { ExchangePosition } from '../../model/exchangePosition';
 
 @Injectable()
 export class PositionService {
 
-  private positions: Array<Position> = [];
-  observablePositions: BehaviorSubject<Array<Position>>;
+  private positions: Array<ExchangePosition> = [];
+  observablePositions: BehaviorSubject<Array<ExchangePosition>>;
 
   constructor(public universityService: UniversityService, private progress: ProgressService, private httpClient: HttpClient, private authService: AuthService) {
-    this.observablePositions = new BehaviorSubject<Position[]>(this.positions);
+    this.observablePositions = new BehaviorSubject<ExchangePosition[]>(this.positions);
     this.universityService.fetchSchemaDefinitions();
   }
 
@@ -27,7 +27,7 @@ export class PositionService {
     this.progress.inProgress(true);
     console.log('Fetching positions from: ' + this.getBaseUri());
 
-    return this.httpClient.get<Array<Position>>(this.getBaseUri())
+    return this.httpClient.get<Array<ExchangePosition>>(this.getBaseUri())
       .subscribe(positions => {
           console.debug('Received positions: ' + JSON.stringify(positions));
 
@@ -38,7 +38,7 @@ export class PositionService {
         () => this.progress.inProgress(false));
   }
 
-  create(position: Position): Observable<boolean> {
+  create(position: ExchangePosition): Observable<boolean> {
     this.progress.inProgress(true);
     console.log('Creating position: ' + JSON.stringify(position));
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AppSettings } from '../../app.settings';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Position } from '../../model/position';
+import { ExchangePosition } from '../../model/exchangePosition';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ProgressService } from '../progress/progress.service';
 import { AuthService } from '../auth/auth.service';
@@ -10,11 +10,11 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class PositionService {
 
-  private positions: Array<Position> = [];
-  public observablePositions: BehaviorSubject<Array<Position>>;
+  private positions: Array<ExchangePosition> = [];
+  public observablePositions: BehaviorSubject<Array<ExchangePosition>>;
 
   constructor(private httpClient: HttpClient, private authService: AuthService, private progress: ProgressService) {
-    this.observablePositions = new BehaviorSubject<Position[]>(this.positions);
+    this.observablePositions = new BehaviorSubject<ExchangePosition[]>(this.positions);
   }
 
   getBaseUri(): string {
@@ -25,7 +25,7 @@ export class PositionService {
     console.debug('Fetching positions from: ' + this.getBaseUri());
 
     this.progress.inProgress(true);
-    this.httpClient.get<Position[]>(this.getBaseUri())
+    this.httpClient.get<ExchangePosition[]>(this.getBaseUri())
       .subscribe((connections) => {
         console.debug('Received positions: ' + JSON.stringify(connections));
         this.positions = [];
@@ -47,7 +47,7 @@ export class PositionService {
       });
   }
 
-  accept(position: Position): Observable<boolean> {
+  accept(position: ExchangePosition): Observable<boolean> {
     this.progress.inProgress(true);
     console.log('Applying for position: ' + JSON.stringify(position));
 

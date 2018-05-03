@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { Position } from '../../../model/position';
+import { ExchangePosition } from '../../../model/exchangePosition';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { SchemaDefinitionRecord } from '../../../model/schemaDefinition';
 
@@ -11,7 +11,7 @@ import { SchemaDefinitionRecord } from '../../../model/schemaDefinition';
 export class CreatePositionDialogComponent {
 
   selectedSchema = new SchemaDefinitionRecord();
-  position = new Position();
+  position = new ExchangePosition();
 
   constructor(public dialogRef: MatDialogRef<CreatePositionDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
