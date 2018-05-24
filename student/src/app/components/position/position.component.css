@@ -15,3 +15,7 @@
 .chip-red {
   background: red;
 }
+
+.mat-table .mat-list-item {
+  font-size: 14px;
+}

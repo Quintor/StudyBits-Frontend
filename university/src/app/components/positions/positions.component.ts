@@ -7,6 +7,7 @@ import { CreatePositionDialogComponent } from './create-position-dialog/create-p
 import { AuthService } from '../../services/auth/auth.service';
 import { UniversityService } from '../../services/university/university.service';
 import { ExchangePosition } from '../../model/exchangePosition';
+import { PositionState } from '../../enums/PositionState';
 
 @Component({
   selector: 'app-positions',
@@ -45,6 +46,14 @@ export class PositionsComponent implements OnInit {
 
   private setDataSource(positions: Array<ExchangePosition>) {
     this.dataSource = new MatTableDataSource<ExchangePosition>(positions);
+  }
+
+  public isOpen(position: ExchangePosition): boolean {
+    return position.state.toString() === PositionState[PositionState.OPEN]
+  }
+
+  public getKeys(map: Map<any, any>) {
+    return Object.keys(map);
   }
 
   openDialog(): void {

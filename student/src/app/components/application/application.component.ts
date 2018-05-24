@@ -35,4 +35,8 @@ export class ApplicationComponent implements OnInit {
     );
   }
 
+  public getKeys(map: Map<any, any>) {
+    return Object.keys(map);
+  }
+
 }

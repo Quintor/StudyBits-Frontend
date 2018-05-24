@@ -29,3 +29,11 @@ body {
 .data-table-detail .mat-row {
   min-height: 40px;
 }
+
+.icon_success {
+  color: green;
+}
+
+.icon_failure {
+  color: red;
+}

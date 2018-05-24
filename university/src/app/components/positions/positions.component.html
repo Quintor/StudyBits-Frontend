@@ -14,15 +14,17 @@
     <ng-container matColumnDef="isOpen">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Open</mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <mat-icon *ngIf="element.isOpen">check_circle</mat-icon>
-        <mat-icon *ngIf="!element.isOpen">remove_circle</mat-icon>
+        <mat-icon class="icon_success" *ngIf="isOpen(element)">check_circle_outline</mat-icon>
+        <mat-icon class="icon_failure" *ngIf="!isOpen(element)">highlight_off</mat-icon>
       </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="attributes">
+    <ng-container id="position-attribute-column" matColumnDef="attributes">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Attributes</mat-header-cell>
       <mat-cell *matCellDef="let element">
-        {{ element.attributes | json }}
+        <mat-list dense>
+          <mat-list-item *ngFor="let key of getKeys(element.attributes)">{{ key | titlecase }}: {{ element.attributes[key] }}</mat-list-item>
+        </mat-list>
       </mat-cell>
     </ng-container>
 

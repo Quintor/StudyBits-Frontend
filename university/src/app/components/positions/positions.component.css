@@ -3,3 +3,7 @@
   right: 1%;
   margin-top: 5px;
 }
+
+.mat-table .mat-list-item {
+  font-size: 14px;
+}

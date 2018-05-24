@@ -33,6 +33,7 @@ import { ProgressService } from './services/progress/progress.service';
 import { PositionComponent } from './components/position/position.component';
 import { PositionService } from './services/position/position.service';
 import { ApplicationComponent } from './components/application/application.component';
+import { ApplicationService } from './services/application/application.service';
 
 
 const appRoutes: Routes = [
@@ -68,6 +69,11 @@ const appRoutes: Routes = [
   {
     path: 'positions',
     component: PositionComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'applications',
+    component: ApplicationComponent,
     canActivate: [AuthGuardService]
   },
   {
@@ -146,6 +152,7 @@ const PRINT_BREAKPOINTS = [{
     ProofRequestService,
     ProgressService,
     PositionService,
+    ApplicationService,
   ],
   bootstrap: [RootComponent]
 })

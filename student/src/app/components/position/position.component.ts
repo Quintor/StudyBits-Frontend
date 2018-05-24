@@ -36,7 +36,7 @@ export class PositionComponent implements OnInit {
     this.positionsSubscription = this.positionService.observablePositions.subscribe(
       (positions) => this.setDataSource(positions)
     );
-    this.positionService.fetchAll();
+    this.update();
   }
 
   private setDataSource(positions: Array<ExchangePosition>) {
@@ -48,6 +48,10 @@ export class PositionComponent implements OnInit {
       success => this.positionService.fetchAll(),
       error => console.error('Error while fetching new positions.')
     )
+  }
+
+  public getKeys(map: Map<any, any>) {
+    return Object.keys(map);
   }
 
   accept(position: ExchangePosition) {

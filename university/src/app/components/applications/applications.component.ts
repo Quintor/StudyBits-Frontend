@@ -29,7 +29,7 @@ export class ApplicationsComponent implements OnInit {
 
   applicationSubscription: Subscription;
   dataSource: MatTableDataSource<ExchangeApplication>;
-  displayedColumns = ['universityName', 'isOpen', 'attributes'];
+  displayedColumns = ['userName', 'state', 'attributes', 'proof'];
 
   constructor(private applicationService: ApplicationService, private snackBar: MatSnackBar) { }
 
@@ -42,6 +42,10 @@ export class ApplicationsComponent implements OnInit {
 
   private setDataSource(positions: Array<ExchangeApplication>) {
     this.dataSource = new MatTableDataSource<ExchangeApplication>(positions);
+  }
+
+  public getKeys(map: Map<any, any>) {
+    return Object.keys(map);
   }
 
   accept(application: ExchangeApplication) {

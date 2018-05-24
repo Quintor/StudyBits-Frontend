@@ -25,6 +25,7 @@ import { PositionService } from './services/position/position.service';
 import { UniversityService } from './services/university/university.service';
 import { CreatePositionDialogComponent } from './components/positions/create-position-dialog/create-position-dialog.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ApplicationService } from './services/application/application.service';
 
 const appRoutes: Routes = [
   {
@@ -125,6 +126,7 @@ const PRINT_BREAKPOINTS = [{
     StudentService,
     PositionService,
     UniversityService,
+    ApplicationService,
   ],
   bootstrap: [RootComponent]
 })

@@ -2,27 +2,31 @@
 
 <div class="data-table mat-elevation-z5">
   <mat-table [dataSource]="dataSource" matSort>
-    <ng-container matColumnDef="universityName">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>University</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.universityName }}</mat-cell>
+    <ng-container matColumnDef="userName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Applicant</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.userName | titlecase }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="state">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Open</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
       <mat-cell *matCellDef="let element">{{ element.state }}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="positionAttributes">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Attributes</mat-header-cell>
+    <ng-container matColumnDef="attributes">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Requirements</mat-header-cell>
       <mat-cell *matCellDef="let element">
-        {{ element.exchangePositionModel.attributes | json }}
+        <mat-list dense>
+          <mat-list-item *ngFor="let key of getKeys(element.exchangePositionModel.attributes)">{{ key | titlecase }}: {{ element.exchangePositionModel.attributes[key] }}</mat-list-item>
+        </mat-list>
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="proof">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Attributes</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Received Information</mat-header-cell>
       <mat-cell *matCellDef="let element">
-        {{ element.proof | json }}
+        <mat-list dense>
+          <mat-list-item *ngFor="let key of getKeys(element.proof)">{{ key | titlecase }}: {{ element.proof[key] }}</mat-list-item>
+        </mat-list>
       </mat-cell>
     </ng-container>
 

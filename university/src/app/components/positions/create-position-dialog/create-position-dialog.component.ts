@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { ExchangePosition } from '../../../model/exchangePosition';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { SchemaDefinitionRecord } from '../../../model/schemaDefinition';
+import { SchemaDefinitionModel } from '../../../model/schemaDefinition';
 
 @Component({
   selector: 'app-create-position-dialog',
@@ -10,7 +10,7 @@ import { SchemaDefinitionRecord } from '../../../model/schemaDefinition';
 })
 export class CreatePositionDialogComponent {
 
-  selectedSchema = new SchemaDefinitionRecord();
+  selectedSchema = new SchemaDefinitionModel();
   position = new ExchangePosition();
 
   constructor(public dialogRef: MatDialogRef<CreatePositionDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
@@ -24,7 +24,7 @@ export class CreatePositionDialogComponent {
   closeDialog(create: boolean) {
     if (create) {
       this.position.universityName = this.data.universityName;
-      this.position.schemaDefinitionRecord = this.selectedSchema;
+      this.position.schemaDefinitionModel = this.selectedSchema;
       this.dialogRef.close(this.position);
     } else {
       this.dialogRef.close(null);
