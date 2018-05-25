@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProofRequestService } from '../../services/proof-requests/proof-request.service';
-import { Position } from '../../model/proofRequest';
+import { ProofRequest } from '../../model/proofRequest';
 import { MatSnackBar, MatTableDataSource } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
 import { ClaimService } from '../../services/claim/claim.service';
@@ -28,7 +28,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 export class ProofRequestComponent implements OnInit {
 
   proofRequestSubscription: Subscription;
-  dataSource: MatTableDataSource<Position>;
+  dataSource: MatTableDataSource<ProofRequest>;
   displayedColumns = ['id', 'name', 'version', 'universityName', 'reviewed'];
 
   constructor(private claimService: ClaimService, private proofRequestService: ProofRequestService, private snackBar: MatSnackBar) { }
@@ -40,24 +40,10 @@ export class ProofRequestComponent implements OnInit {
     this.proofRequestService.update();
   }
 
-  private setDataSource(proofRequests: Array<Position>) {
-    this.dataSource = new MatTableDataSource<Position>(proofRequests);
+  private setDataSource(proofRequests: Array<ProofRequest>) {
+    this.dataSource = new MatTableDataSource<ProofRequest>(proofRequests);
   }
 
-  accept(element: Position) {
-    this.claimService.fetchNewClaims().subscribe(success => {
-      this.proofRequestService.accept(element).subscribe(
-        success => {
-          console.log('Accepted ProofRequest successfully.');
-          this.proofRequestService.update();
-          this.snackBar.open("Successfully sent proof!", null, {duration: 3000});
-        },
-        error => {
-          this.snackBar.open("Failed to send proof.", null, {duration: 1000});
-          console.error('Could not accept proof request: ' + JSON.stringify(error))
-        }
-      );
-    });
-  }
+
 
 }

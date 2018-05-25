@@ -1,4 +1,4 @@
-export class Position {
+export class ConnectionRecord {
   id: number;
   did: string;
   nonce: string;

@@ -1,6 +1,6 @@
 import { PositionState } from '../enums/PositionState';
 
-export class Position {
+export class ProofRequest {
   id: number;
   proofId: number;
   studentUserName: string;

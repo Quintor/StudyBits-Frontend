@@ -36,10 +36,10 @@
 </div>
 
 <ng-template #tpl let-element>
-  <div class="mat-row" [@detailExpand] style="overflow: hidden">
-    <mat-chip-list>
-      <mat-chip class="mat-caption">Did: {{element.did}}</mat-chip>
-    </mat-chip-list>
+  <div class="mat-row" [@detailExpand] *ngIf="hasOpenUserProofs(element)" style="overflow: hidden">
+    <div id="proof-request-buttons">
+      <button mat-raised-button (click)="proveIdentity(element)" color="primary">Prove Identity</button>
+    </div>
   </div>
 </ng-template>
 

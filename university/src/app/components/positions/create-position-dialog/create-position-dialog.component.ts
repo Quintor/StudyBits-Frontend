@@ -21,6 +21,16 @@ export class CreatePositionDialogComponent {
     }
   }
 
+  public getFilteredAttributes(schemaDefinition: SchemaDefinitionModel): Array<string> {
+    if (schemaDefinition.name === "Enrolment"){
+      return schemaDefinition.attrNames;
+    } else if (schemaDefinition.name === "Transcript") {
+      return ["degree", "status", "average"];
+    } else {
+      return null;
+    }
+  }
+
   closeDialog(create: boolean) {
     if (create) {
       this.position.universityName = this.data.universityName;

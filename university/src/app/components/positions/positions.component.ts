@@ -58,7 +58,7 @@ export class PositionsComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(CreatePositionDialogComponent, {
-      width: '415px',
+      width: '500px',
       data: {
         universityName: this.authService.currentUser.universityName,
         schemas: this.universityService.schemaDefinitions
@@ -69,11 +69,11 @@ export class PositionsComponent implements OnInit {
       if (position != null) {
         this.positionService.create(position).subscribe(
           success => {
-            this.snackBar.open('Position created successfully');
+            this.snackBar.open('Position created successfully', null, {duration: 3000});
             this.positionService.fetchAll();
           },
           error => {
-            this.snackBar.open('Error: Could not create Student');
+            this.snackBar.open('Error: Could not create Student', null, {duration: 3000});
             console.error('Could not create new Student: ' + JSON.stringify(error));
           }
         );

@@ -2,3 +2,7 @@
   float: right;
   margin: 5px;
 }
+
+#proof-request-buttons {
+  margin-left: auto;
+}

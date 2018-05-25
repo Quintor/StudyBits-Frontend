@@ -45,7 +45,7 @@ export class ApplicationsComponent implements OnInit {
   }
 
   public getKeys(map: Map<any, any>) {
-    return Object.keys(map);
+    return Object.keys(map).filter(key => key !== "id").sort()
   }
 
   accept(application: ExchangeApplication) {
