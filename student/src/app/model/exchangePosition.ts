@@ -1,5 +1,5 @@
 import { PositionState } from '../enums/PositionState';
-import { SchemaDefinitionModel } from '../../../../university/src/app/model/schemaDefinition';
+import { SchemaDefinitionModel } from './schemaDefinition';
 
 export class ExchangePosition {
   universityName: string;
