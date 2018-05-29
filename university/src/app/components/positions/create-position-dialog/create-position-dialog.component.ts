@@ -13,7 +13,9 @@ export class CreatePositionDialogComponent {
   selectedSchema = new SchemaDefinitionModel();
   position = new ExchangePosition();
 
-  constructor(public dialogRef: MatDialogRef<CreatePositionDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(public dialogRef: MatDialogRef<CreatePositionDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.selectedSchema = data.schemas.find(schema => schema.name === "Transcript");
+  }
 
   setPositionAttribute(key, value) {
     if (value != "" && value != null) {
