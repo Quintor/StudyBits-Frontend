@@ -61,8 +61,8 @@ export class PositionComponent implements OnInit {
         this.positionService.fetchAll();
       },
       error => {
-        console.error('Error while applying for Exchange position.');
-        this.snackBar.open('Error while applying for Exchange position', null, {duration: 3000});
+        console.error('Error: Could not apply for Exchange position.');
+        this.snackBar.open('Error: Could not apply for Exchange position', null, {duration: 3000});
       }
     )
   }
