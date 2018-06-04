@@ -44,20 +44,6 @@ export class ProofRequestComponent implements OnInit {
     this.dataSource = new MatTableDataSource<ProofRequest>(proofRequests);
   }
 
-  accept(element: ProofRequest) {
-    this.claimService.fetchNewClaims().subscribe(success => {
-      this.proofRequestService.accept(element).subscribe(
-        success => {
-          console.log('Accepted ProofRequest successfully.');
-          this.proofRequestService.update();
-          this.snackBar.open("Successfully sent proof!", null, {duration: 3000});
-        },
-        error => {
-          this.snackBar.open("Failed to send proof.", null, {duration: 1000});
-          console.error('Could not accept proof request: ' + JSON.stringify(error))
-        }
-      );
-    });
-  }
+
 
 }

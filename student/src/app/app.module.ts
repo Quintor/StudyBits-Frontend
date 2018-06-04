@@ -1,26 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {
-  MatButtonModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatDialogModule,
-  MatDividerModule,
-  MatFormFieldModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatProgressBarModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSnackBarModule,
-  MatSortModule,
-  MatTableModule,
-  MatToolbarModule,
-} from '@angular/material';
+import { MatButtonModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatProgressBarModule, MatSelectModule, MatSidenavModule, MatSnackBarModule, MatSortModule, MatTableModule, MatToolbarModule, } from '@angular/material';
 import { BREAKPOINTS, FlexLayoutModule } from '@angular/flex-layout';
 
 import { TopMenuComponent } from './components/top-menu/top-menu.component';
@@ -49,6 +30,10 @@ import { ProofRequestService } from './services/proof-requests/proof-request.ser
 import { ProofRequestComponent } from './components/proof-request/proof-request.component';
 import { ProgressbarComponent } from './components/progress/progressbar/progressbar.component';
 import { ProgressService } from './services/progress/progress.service';
+import { PositionComponent } from './components/position/position.component';
+import { PositionService } from './services/position/position.service';
+import { ApplicationComponent } from './components/application/application.component';
+import { ApplicationService } from './services/application/application.service';
 
 
 const appRoutes: Routes = [
@@ -72,23 +57,23 @@ const appRoutes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
-    path: 'proof-requests',
-    component: ProofRequestComponent,
-    canActivate: [AuthGuardService]
-  },
-  {
     path: 'connections',
     component: ConnectionComponent,
     canActivate: [AuthGuardService]
   },
   {
-    path: 'profile',
-    component: ProfileComponent,
+    path: 'proof-requests',
+    component: ProofRequestComponent,
     canActivate: [AuthGuardService]
   },
   {
-    path: 'settings',
-    component: SettingsComponent,
+    path: 'positions',
+    component: PositionComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'applications',
+    component: ApplicationComponent,
     canActivate: [AuthGuardService]
   },
   {
@@ -120,6 +105,8 @@ const PRINT_BREAKPOINTS = [{
     CreateDialogComponent,
     ProofRequestComponent,
     ProgressbarComponent,
+    PositionComponent,
+    ApplicationComponent,
   ],
   entryComponents: [
     CreateDialogComponent
@@ -164,6 +151,8 @@ const PRINT_BREAKPOINTS = [{
     UniversityService,
     ProofRequestService,
     ProgressService,
+    PositionService,
+    ApplicationService,
   ],
   bootstrap: [RootComponent]
 })

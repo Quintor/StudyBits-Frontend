@@ -20,7 +20,7 @@ export class ConnectionService {
     return AppSettings.API_ENDPOINT + `student/${this.authService.currentUser.userName}/connections`;
   }
 
-  fetchConnections() {
+  fetchAll() {
     console.debug("Fetching connections from: " + this.getBaseUri());
 
     this.progress.inProgress(true);

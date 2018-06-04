@@ -12,5 +12,5 @@ RUN npm install
 
 ADD . .
 
-CMD ng serve
+CMD ng serve --host 0.0.0.0 --disableHostCheck true
 

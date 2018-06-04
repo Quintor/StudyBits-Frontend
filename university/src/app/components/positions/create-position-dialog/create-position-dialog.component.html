@@ -1,0 +1,11 @@
+<div class="mat-title" mat-dialog-title>Create a new Exchange Position</div>
+<div class="mat-subheading-2">Fill in the Position Requirements</div>
+<mat-dialog-content>
+  <mat-form-field *ngFor="let attribute of getFilteredAttributes(selectedSchema)">
+    <input matInput placeholder="{{attribute | titlecase }}" (keyup)="setPositionAttribute(attribute, $event.target.value)">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button (click)="closeDialog(true)" color="primary">Create</button>
+  <button mat-raised-button (click)="closeDialog(false)">Cancel</button>
+</mat-dialog-actions>

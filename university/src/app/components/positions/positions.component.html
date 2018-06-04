@@ -1,0 +1,46 @@
+<app-progressbar></app-progressbar>
+
+<button id="add-position" mat-mini-fab (click)="openDialog()">
+  <mat-icon>add</mat-icon>
+</button>
+
+<div class="data-table mat-elevation-z5">
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="universityName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>University</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.universityName }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="isOpen">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Open</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-icon class="icon_success" *ngIf="isOpen(element)">check_circle_outline</mat-icon>
+        <mat-icon class="icon_failure" *ngIf="!isOpen(element)">highlight_off</mat-icon>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container id="position-attribute-column" matColumnDef="attributes">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Attributes</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-list dense>
+          <mat-list-item *ngFor="let key of getKeys(element.attributes)">{{ key | titlecase }}: {{ element.attributes[key] }}</mat-list-item>
+        </mat-list>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" [detailRow]="row" [detailRowTpl]="tpl"></mat-row>
+  </mat-table>
+  <div class="no-data-row mat-caption" *ngIf="this.dataSource.data.length == 0">
+    <span>No Positions available</span>
+  </div>
+</div>
+
+<ng-template #tpl let-element>
+  <div class="mat-row" [@detailExpand] style="overflow: hidden">
+    <mat-chip-list>
+      <mat-chip>Schema Name: {{element.schemaName}}</mat-chip>
+      <mat-chip>Schema Version: {{element.schemaVersion}}</mat-chip>
+    </mat-chip-list>
+  </div>
+</ng-template>

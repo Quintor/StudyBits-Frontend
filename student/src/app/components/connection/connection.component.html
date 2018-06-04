@@ -22,8 +22,8 @@
     <ng-container matColumnDef="confirmed">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Identity confirmed</mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <mat-icon class="color-green" *ngIf="element.confirmed">check_circle</mat-icon>
-        <mat-icon class="color-red" *ngIf="!element.confirmed">error</mat-icon>
+        <mat-icon class="icon_success" *ngIf="element.confirmed">check_circle_outline</mat-icon>
+        <mat-icon class="icon_failure" *ngIf="!element.confirmed">highlight_off</mat-icon>
       </mat-cell>
     </ng-container>
 
@@ -36,10 +36,10 @@
 </div>
 
 <ng-template #tpl let-element>
-  <div class="mat-row" [@detailExpand] style="overflow: hidden">
-    <mat-chip-list>
-      <mat-chip class="mat-caption">Did: {{element.did}}</mat-chip>
-    </mat-chip-list>
+  <div class="mat-row" [@detailExpand] *ngIf="hasOpenUserProofs(element)" style="overflow: hidden">
+    <div id="proof-request-buttons">
+      <button mat-raised-button (click)="proveIdentity(element)" color="primary">Prove Identity</button>
+    </div>
   </div>
 </ng-template>
 

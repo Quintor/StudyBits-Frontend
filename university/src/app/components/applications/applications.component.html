@@ -1,0 +1,48 @@
+<app-progressbar></app-progressbar>
+
+<div class="data-table mat-elevation-z5">
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="userName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Applicant</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.userName | titlecase }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="state">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.state }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="attributes">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Requirements</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-list dense>
+          <mat-list-item *ngFor="let key of getKeys(element.exchangePositionModel.attributes)">{{ key | titlecase }}: {{ element.exchangePositionModel.attributes[key] }}</mat-list-item>
+        </mat-list>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="proof">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Received Information</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-list dense>
+          <mat-list-item *ngFor="let key of getKeys(element.proof)">{{ key | titlecase }}: {{ element.proof[key] }}</mat-list-item>
+        </mat-list>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" [detailRow]="row" [detailRowTpl]="tpl"></mat-row>
+  </mat-table>
+  <div class="no-data-row mat-caption" *ngIf="this.dataSource.data.length == 0">
+    <span>No Applications available</span>
+  </div>
+</div>
+
+<ng-template #tpl let-element>
+  <div class="mat-row" [@detailExpand] style="overflow: hidden">
+    <div id="application-buttons">
+      <button mat-raised-button (click)="accept(element)" color="primary">Accept</button>
+      <button mat-raised-button color="warn">Decline</button>
+    </div>
+  </div>
+</ng-template>

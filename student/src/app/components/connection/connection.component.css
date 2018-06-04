@@ -3,10 +3,6 @@
   margin: 5px;
 }
 
-.color-green{
-  color: green;
-}
-
-.color-red {
-  color: red;
+#proof-request-buttons {
+  margin-left: auto;
 }

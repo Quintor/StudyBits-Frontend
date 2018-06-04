@@ -1,38 +1,31 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {
-  MatButtonModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatDialogModule,
-  MatDividerModule,
-  MatFormFieldModule,
-  MatIconModule,
-  MatInputModule,
-  MatMenuModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSnackBarModule,
-  MatSortModule,
-  MatTableModule,
-  MatToolbarModule,
-} from '@angular/material';
+import { MatButtonModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatProgressBarModule, MatSelectModule, MatSidenavModule, MatSnackBarModule, MatSortModule, MatTableModule, MatToolbarModule, } from '@angular/material';
 import { BREAKPOINTS, FlexLayoutModule } from '@angular/flex-layout';
-
 
 import { RootComponent } from './components/root/root.component';
 import { TopMenuComponent } from './components/top-menu/top-menu.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ConnectionsComponent } from './components/connections/connections.component';
 import { StudentsComponent } from './components/students/students.component';
-import { ClaimsComponent } from './components/claims/claims.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { LoginComponent } from './components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { AuthGuardService } from '../../../student/src/app/services/auth-guard/auth-guard.service';
+import { DetailRowDirective } from './directives/detail-row/detail-row.directive';
+import { PositionsComponent } from './components/positions/positions.component';
+import { ApplicationsComponent } from './components/applications/applications.component';
+import { AuthGuardService } from './services/auth-guard/auth-guard.service';
+import { AuthService } from './services/auth/auth.service';
+import { ProgressService } from './services/progress/progress.service';
+import { StudentService } from './services/student/student.service';
+import { ProgressbarComponent } from './components/progressbar/progressbar.component';
+import { CreateStudentDialogComponent } from './components/students/create-student-dialog/create-student-dialog.component';
+import { PositionService } from './services/position/position.service';
+import { UniversityService } from './services/university/university.service';
+import { CreatePositionDialogComponent } from './components/positions/create-position-dialog/create-position-dialog.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ApplicationService } from './services/application/application.service';
 
 const appRoutes: Routes = [
   {
@@ -50,18 +43,18 @@ const appRoutes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
-    path: 'claims',
-    component: ClaimsComponent,
-    canActivate: [AuthGuardService]
-  },
-  {
-    path: 'connections',
-    component: ConnectionsComponent,
-    canActivate: [AuthGuardService]
-  },
-  {
     path: 'students',
     component: StudentsComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'positions',
+    component: PositionsComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'applications',
+    component: ApplicationsComponent,
     canActivate: [AuthGuardService]
   },
   {
@@ -82,11 +75,19 @@ const PRINT_BREAKPOINTS = [{
     RootComponent,
     TopMenuComponent,
     DashboardComponent,
-    ConnectionsComponent,
     StudentsComponent,
-    ClaimsComponent,
     LoginComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    PositionsComponent,
+    ApplicationsComponent,
+    ProgressbarComponent,
+    CreateStudentDialogComponent,
+    CreatePositionDialogComponent,
+    DetailRowDirective,
+  ],
+  entryComponents: [
+    CreateStudentDialogComponent,
+    CreatePositionDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -109,16 +110,23 @@ const PRINT_BREAKPOINTS = [{
     FlexLayoutModule,
     MatDividerModule,
     FormsModule,
-    RouterModule.forRoot(
-      appRoutes,
-      {enableTracing: false}
-    )
+    MatProgressBarModule,
+    MatChipsModule,
+    MatListModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [
     {
       provide: BREAKPOINTS,
       useValue: PRINT_BREAKPOINTS
     },
+    AuthService,
+    AuthGuardService,
+    ProgressService,
+    StudentService,
+    PositionService,
+    UniversityService,
+    ApplicationService,
   ],
   bootstrap: [RootComponent]
 })
