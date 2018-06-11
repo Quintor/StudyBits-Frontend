@@ -2,7 +2,7 @@
 <div class="mat-subheading-2">Fill in the Position Requirements</div>
 <mat-dialog-content>
   <mat-form-field *ngFor="let attribute of getFilteredAttributes(selectedSchema)">
-    <input matInput placeholder="{{attribute | titlecase }}" (keyup)="setPositionAttribute(attribute, $event.target.value)">
+    <input matInput placeholder="{{attribute | titlecase }}" (keyup)="setPositionAttribute(attribute, $event.target.value)" value="{{ demoData[attribute] }}">
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
