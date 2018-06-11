@@ -19,7 +19,7 @@ export class ProofRequestService {
   }
 
   getBaseUri(): string {
-    return AppSettings.API_ENDPOINT + `student/${this.authService.currentUser.userName}/proof-requests/`;
+    return AppSettings.API_STUDENT_ENDPOINT + `student/${this.authService.currentUser.userName}/proof-requests/`;
   }
 
   fetch(): Observable<boolean> {

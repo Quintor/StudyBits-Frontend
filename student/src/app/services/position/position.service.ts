@@ -18,7 +18,14 @@ export class PositionService {
   }
 
   getBaseUri(): string {
-    return AppSettings.API_ENDPOINT + `student/${this.authService.currentUser.userName}/positions`;
+    return AppSettings.API_STUDENT_ENDPOINT + `student/${this.authService.currentUser.userName}/positions`;
+  }
+
+  public update(): void {
+    this.fetchNew().subscribe(
+      success => this.fetchAll(),
+      error => console.error('Error while fetching new positions.')
+    )
   }
 
   fetchAll() {

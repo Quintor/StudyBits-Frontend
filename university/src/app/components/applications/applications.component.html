@@ -30,19 +30,20 @@
       </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <div *ngIf="isOpen(element)">
+          <button mat-raised-button (click)="accept(element)" color="primary">Accept</button>
+          <button mat-raised-button color="warn">Decline</button>
+        </div>
+      </mat-cell>
+    </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" [detailRow]="row" [detailRowTpl]="tpl"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row"></mat-row>
   </mat-table>
   <div class="no-data-row mat-caption" *ngIf="this.dataSource.data.length == 0">
     <span>No Applications available</span>
   </div>
 </div>
-
-<ng-template #tpl let-element>
-  <div class="mat-row" [@detailExpand] style="overflow: hidden">
-    <div id="application-buttons">
-      <button mat-raised-button (click)="accept(element)" color="primary">Accept</button>
-      <button mat-raised-button color="warn">Decline</button>
-    </div>
-  </div>
-</ng-template>

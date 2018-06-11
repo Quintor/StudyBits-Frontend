@@ -11,7 +11,7 @@ export class UniversityService {
   constructor(private httpClient: HttpClient) {}
 
   fetchUniversities() {
-    this.httpClient.get<University[]>(AppSettings.API_ENDPOINT + '/university')
+    this.httpClient.get<University[]>(AppSettings.API_STUDENT_ENDPOINT + '/university')
       .subscribe((universities) => this.universities = universities);
   }
 

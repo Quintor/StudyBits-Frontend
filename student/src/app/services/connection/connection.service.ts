@@ -17,7 +17,7 @@ export class ConnectionService {
   }
 
   getBaseUri(): string {
-    return AppSettings.API_ENDPOINT + `student/${this.authService.currentUser.userName}/connections`;
+    return AppSettings.API_STUDENT_ENDPOINT + `student/${this.authService.currentUser.userName}/connections`;
   }
 
   fetchAll() {

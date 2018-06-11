@@ -18,7 +18,7 @@ export class AuthService {
   login(user: University): Observable<boolean> {
     console.log('Logging in with user: ' + JSON.stringify(user));
 
-    return this.httpClient.get<University>(AppSettings.API_ENDPOINT + `${user.universityName}/admin/${user.userName}`, {observe: 'response'})
+    return this.httpClient.get<University>(AppSettings.API_UNIVERSITY_ENDPOINT + `${user.universityName}/admin/${user.userName}`, {observe: 'response'})
       .map(res => {
         if (res.status == 200) {
           this.isLoggedIn = true;

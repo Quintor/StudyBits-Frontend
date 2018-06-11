@@ -13,7 +13,7 @@
 
     <ng-container matColumnDef="schemaKeyName">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Claim Type</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.schemaKeyName }}</mat-cell>
+      <mat-cell *matCellDef="let element">{{ getType(element.schemaId) }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="issuingUniversityName">
@@ -33,6 +33,10 @@
 <ng-template #tpl let-element>
   <div id="claimDetailTable" class="data-table data-table-detail" [@detailExpand] style="overflow: hidden">
     <mat-table [dataSource]="parseValuesToObjects(element.values)">
+      <ng-container matColumnDef="emptyCol">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let claimValue"><span class="mat-body-1"></span></mat-cell>
+      </ng-container>
       <ng-container matColumnDef="key">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let claimValue"><span class="mat-body-strong">{{ claimValue.key }}</span></mat-cell>
@@ -42,8 +46,9 @@
         <mat-cell *matCellDef="let claimValue"><span class="mat-body-1">{{ claimValue.value }}</span></mat-cell>
       </ng-container>
 
-      <mat-header-row *matHeaderRowDef="['key', 'value']" style="display: none"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['key', 'value']" class="element-row"></mat-row>
+
+      <mat-header-row *matHeaderRowDef="['emptyCol', 'key', 'value']" style="display: none"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['emptyCol', 'key', 'value']" class="element-row"></mat-row>
 
     </mat-table>
   </div>

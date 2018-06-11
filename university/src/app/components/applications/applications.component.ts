@@ -29,7 +29,7 @@ export class ApplicationsComponent implements OnInit {
 
   applicationSubscription: Subscription;
   dataSource: MatTableDataSource<ExchangeApplication>;
-  displayedColumns = ['userName', 'state', 'attributes', 'proof'];
+  displayedColumns = ['userName', 'state', 'attributes', 'proof', 'actions'];
 
   constructor(private applicationService: ApplicationService, private snackBar: MatSnackBar) { }
 
@@ -46,6 +46,10 @@ export class ApplicationsComponent implements OnInit {
 
   public getKeys(map: Map<any, any>) {
     return Object.keys(map).filter(key => key !== "id").sort()
+  }
+
+  public isOpen(position: ExchangeApplication): boolean {
+    return position.state.toString() === ApplicationState[ApplicationState.APPLIED]
   }
 
   accept(application: ExchangeApplication) {

@@ -34,6 +34,7 @@ import { PositionComponent } from './components/position/position.component';
 import { PositionService } from './services/position/position.service';
 import { ApplicationComponent } from './components/application/application.component';
 import { ApplicationService } from './services/application/application.service';
+import { NukeService } from './services/nuke/nuke.service';
 
 
 const appRoutes: Routes = [
@@ -153,6 +154,7 @@ const PRINT_BREAKPOINTS = [{
     ProgressService,
     PositionService,
     ApplicationService,
+    NukeService,
   ],
   bootstrap: [RootComponent]
 })

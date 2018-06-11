@@ -62,10 +62,18 @@ export class ClaimComponent implements OnInit {
     let asJSON = JSON.parse(obj);
     let objects = [];
 
+    console.log(asJSON)
+
     Object.keys(asJSON).forEach(key => {
-      objects.push(new ClaimValue(key, asJSON[key][0], asJSON[key][1]))
+      objects.push(new ClaimValue(key, asJSON[key].raw, asJSON[key].encoded))
     });
 
+    console.log(objects);
+
     return objects;
+  }
+
+  getType(schemaId: string): String {
+    return schemaId.split(":", 3)[2];
   }
 }

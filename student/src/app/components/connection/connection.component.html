@@ -1,6 +1,8 @@
 <app-progressbar></app-progressbar>
 
-<button id="add-connection" mat-mini-fab (click)="openDialog()"><mat-icon>add</mat-icon></button>
+<button id="add-connection" mat-mini-fab (click)="openDialog()">
+  <mat-icon>add</mat-icon>
+</button>
 
 <div class="data-table mat-elevation-z5">
   <mat-table [dataSource]="dataSource" matSort>
@@ -22,8 +24,17 @@
     <ng-container matColumnDef="confirmed">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Identity confirmed</mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <mat-icon class="icon_success" *ngIf="element.confirmed">check_circle_outline</mat-icon>
-        <mat-icon class="icon_failure" *ngIf="!element.confirmed">highlight_off</mat-icon>
+        <mat-icon class="connection-icon icon_success" *ngIf="element.confirmed">check_circle_outline</mat-icon>
+        <mat-icon class="connection-icon icon_failure" *ngIf="!element.confirmed">highlight_off</mat-icon>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <div *ngIf="!element.confirmed">
+          <button mat-raised-button class="proof-identity-button" *ngIf="hasOpenUserProofs(element)" (click)="proveIdentity(element)" color="primary">Prove Identity</button>
+        </div>
       </mat-cell>
     </ng-container>
 
@@ -36,13 +47,28 @@
 </div>
 
 <ng-template #tpl let-element>
-  <div class="mat-row" [@detailExpand] *ngIf="hasOpenUserProofs(element)" style="overflow: hidden">
-    <div id="proof-request-buttons">
-      <button mat-raised-button (click)="proveIdentity(element)" color="primary">Prove Identity</button>
-    </div>
+  <div *ngIf="hasOpenUserProofs(element)" id="claimDetailTable" class="data-table data-table-detail" [@detailExpand] style="overflow: hidden">
+    <mat-table [dataSource]="getUserProofForUniversity(element.universityName)">
+      <ng-container matColumnDef="emptyCol">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let claimValue"><span class="mat-body-1"></span></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="attributes">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let proofRequest">
+          <mat-chip-list>
+            <mat-chip *ngFor="let attribute of proofRequest.attributes">{{ attribute }}</mat-chip>
+          </mat-chip-list>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['emptyCol', 'emptyCol', 'emptyCol', 'attributes']" style="display: none"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['emptyCol', 'emptyCol', 'emptyCol', 'attributes']" class="element-row"></mat-row>
+
+    </mat-table>
   </div>
 </ng-template>
-
 
 
 

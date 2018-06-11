@@ -36,7 +36,7 @@ export class ConnectionComponent implements OnInit {
   connectionSubscription: Subscription;
 
   dataSource: MatTableDataSource<any>;
-  displayedColumns = ['id', 'studentUserName', 'universityName', 'confirmed'];
+  displayedColumns = ['id', 'studentUserName', 'universityName', 'confirmed', 'actions'];
 
   // For sorting of the table columns
   @ViewChild(MatSort) sort: MatSort;
@@ -65,6 +65,11 @@ export class ConnectionComponent implements OnInit {
   public proveIdentity(element: ConnectionRecord) {
     let userProof = this.getUserProofForUniversity(element.universityName).pop();
     this.accept(userProof);
+  }
+
+  public getProofRequestAttributesFromConnection(element: ConnectionRecord) {
+    let proofRequest = this.getUserProofForUniversity(element.universityName)[0];
+    return proofRequest.attributes;
   }
 
   private getUserProofForUniversity(universityName: string): Array<ProofRequest> {

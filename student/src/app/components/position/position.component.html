@@ -1,6 +1,6 @@
 <app-progressbar></app-progressbar>
 
-<button id="refresh-claims" mat-mini-fab (click)="update()">
+<button id="refresh-claims" mat-mini-fab (click)="positionService.update()">
   <mat-icon>refresh</mat-icon>
 </button>
 
@@ -13,7 +13,10 @@
 
     <ng-container matColumnDef="state">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.state }}</mat-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-icon class="connection-icon icon_success" *ngIf="isOpen(element)">check_circle_outline</mat-icon>
+        <mat-icon class="connection-icon icon_failure" *ngIf="!isOpen(element)">highlight_off</mat-icon>
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="attributes">
@@ -25,19 +28,21 @@
       </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <div>
+          <button mat-raised-button [disabled]="hasApplied(element)" (click)="accept(element)" color="primary">Apply</button>
+        </div>
+      </mat-cell>
+    </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" [detailRow]="row" [detailRowTpl]="tpl"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row"></mat-row>
+
   </mat-table>
   <div class="no-data-row mat-caption" *ngIf="this.dataSource.data.length == 0">
     <span>No Positions available</span>
   </div>
 </div>
-
-<ng-template #tpl let-element>
-  <div class="mat-row" [@detailExpand] style="overflow: hidden">
-    <div id="proof-request-buttons">
-      <button mat-raised-button (click)="accept(element)" color="primary">Apply</button>
-    </div>
-  </div>
-</ng-template>
 

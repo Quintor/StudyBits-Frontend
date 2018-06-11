@@ -20,7 +20,7 @@ export class PositionService {
   }
 
   private getBaseUri(): string {
-    return AppSettings.API_ENDPOINT + `${this.authService.currentUser.universityName}/admin/${this.authService.currentUser.userName}/positions`;
+    return AppSettings.API_UNIVERSITY_ENDPOINT + `${this.authService.currentUser.universityName}/admin/${this.authService.currentUser.userName}/positions`;
   }
 
   fetchAll() {

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
+import { NukeService } from '../../services/nuke/nuke.service';
+import { ProgressService } from '../../services/progress/progress.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-top-menu',
@@ -11,7 +14,7 @@ export class TopMenuComponent implements OnInit {
 
   private path: string;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService, private nukeService: NukeService, private progressService: ProgressService, private snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.subscribeForNavigationEvents();
@@ -28,5 +31,15 @@ export class TopMenuComponent implements OnInit {
 
   logout(): void {
     this.authService.logout();
+  }
+
+  nuke() {
+    this.progressService.inProgress(true);
+
+    this.nukeService.nuke().subscribe(
+      success => this.snackBar.open('Reset successful', null, {duration: 3000}),
+      error => this.snackBar.open('Error: Reset failure', null, {duration: 3000}),
+      () => this.progressService.inProgress(false)
+    );
   }
 }

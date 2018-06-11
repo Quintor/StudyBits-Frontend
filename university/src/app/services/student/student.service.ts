@@ -18,7 +18,7 @@ export class StudentService {
   }
 
   private getBaseUri(): string {
-    return AppSettings.API_ENDPOINT + `${this.authService.currentUser.universityName}/admin/${this.authService.currentUser.userName}/students`;
+    return AppSettings.API_UNIVERSITY_ENDPOINT + `${this.authService.currentUser.universityName}/admin/${this.authService.currentUser.userName}/students`;
   }
 
   fetchAll() {

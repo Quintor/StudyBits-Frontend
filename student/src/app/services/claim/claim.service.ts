@@ -19,7 +19,7 @@ export class ClaimService {
   }
 
   getBaseUri(): string {
-    return AppSettings.API_ENDPOINT + `student/${this.authService.currentUser.userName}/claims/`;
+    return AppSettings.API_STUDENT_ENDPOINT + `student/${this.authService.currentUser.userName}/claims/`;
   }
 
   fetchClaims(): Observable<boolean> {

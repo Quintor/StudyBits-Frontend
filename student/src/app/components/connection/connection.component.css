@@ -6,3 +6,15 @@
 #proof-request-buttons {
   margin-left: auto;
 }
+
+.proof-identity-button {
+  margin-left: 20%;
+}
+
+.connection-icon {
+  vertical-align: middle;
+}
+
+#proof-request-info {
+  margin-left: auto;
+}

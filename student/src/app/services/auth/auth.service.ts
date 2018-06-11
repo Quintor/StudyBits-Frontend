@@ -20,7 +20,7 @@ export class AuthService {
     const params = new HttpParams().set('name', user.userName.toLowerCase());
     console.log('Logging in with user: ' + JSON.stringify(params));
 
-    return this.httpClient.get<Student>(AppSettings.API_ENDPOINT + `student/${user.userName}`, {params: params}).map((user) => {
+    return this.httpClient.get<Student>(AppSettings.API_STUDENT_ENDPOINT + `student/${user.userName}`, {params: params}).map((user) => {
       this.isLoggedIn = true;
       this.currentUser = user;
       console.log('Logged in with user: ' + JSON.stringify(user));

@@ -4,6 +4,8 @@ import { ExchangePosition } from '../../model/exchangePosition';
 import { Subscription } from 'rxjs/Subscription';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { PositionService } from '../../services/position/position.service';
+import { PositionState } from '../../enums/PositionState';
+import { ApplicationService } from '../../services/application/application.service';
 
 @Component({
   selector: 'app-proof-request',
@@ -28,37 +30,40 @@ export class PositionComponent implements OnInit {
 
   positionsSubscription: Subscription;
   dataSource: MatTableDataSource<ExchangePosition>;
-  displayedColumns = ['universityName', 'state', 'attributes'];
+  displayedColumns = ['universityName', 'state', 'attributes', 'actions'];
 
-  constructor(public positionService: PositionService, private snackBar: MatSnackBar) { }
+  constructor(public positionService: PositionService, private applicationService: ApplicationService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.positionsSubscription = this.positionService.observablePositions.subscribe(
       (positions) => this.setDataSource(positions)
     );
-    this.update();
+    this.positionService.update();
   }
 
   private setDataSource(positions: Array<ExchangePosition>) {
     this.dataSource = new MatTableDataSource<ExchangePosition>(positions);
   }
 
-  update() {
-    this.positionService.fetchNew().subscribe(
-      success => this.positionService.fetchAll(),
-      error => console.error('Error while fetching new positions.')
-    )
-  }
-
-  public getKeys(map: Map<any, any>) {
+  public getKeys(map: Map<any, any>): Array<string> {
     return Object.keys(map);
   }
 
-  accept(position: ExchangePosition) {
+  public isOpen(position: ExchangePosition): boolean {
+    return position.state.toString() === PositionState[PositionState.OPEN]
+  }
+
+  public hasApplied(position: ExchangePosition): boolean {
+    let applicationsForPosition = this.applicationService.applications.filter(application => application.exchangePositionModel.proofRecordId == position.proofRecordId);
+    return applicationsForPosition.length != 0;
+  }
+
+  public accept(position: ExchangePosition): void {
     this.positionService.accept(position).subscribe(
       success => {
         this.snackBar.open('Application for Exchange Position successful', null, {duration: 3000});
-        this.positionService.fetchAll();
+        this.applicationService.update();
+        this.positionService.update();
       },
       error => {
         console.error('Error: Could not apply for Exchange position.');

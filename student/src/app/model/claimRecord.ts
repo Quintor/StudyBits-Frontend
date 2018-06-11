@@ -2,7 +2,7 @@ export class ClaimRecord {
   id: number;
   studentUserName: string;
   issuingUniversityName: string;
-  schemaKeyName: string;
+  schemaId: string;
   label: string;
   revReqSeqNo: number;
   values: string;

@@ -10,7 +10,7 @@ import { ExchangeApplication } from '../../model/exchangeApplication';
 @Injectable()
 export class ApplicationService {
 
-  private applications: Array<ExchangeApplication> = [];
+  public applications: Array<ExchangeApplication> = [];
   public observableApplications: BehaviorSubject<Array<ExchangeApplication>>;
 
   constructor(private httpClient: HttpClient, private authService: AuthService, private progress: ProgressService) {
@@ -18,7 +18,14 @@ export class ApplicationService {
   }
 
   getBaseUri(): string {
-    return AppSettings.API_ENDPOINT + `student/${this.authService.currentUser.userName}/applications`;
+    return AppSettings.API_STUDENT_ENDPOINT + `student/${this.authService.currentUser.userName}/applications`;
+  }
+
+  public update(): void {
+    this.fetchNew().subscribe(
+      success => this.fetchAll(),
+      error => console.error('Error while fetching new applications.')
+    )
   }
 
   fetchAll() {

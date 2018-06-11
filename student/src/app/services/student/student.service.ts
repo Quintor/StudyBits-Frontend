@@ -16,7 +16,7 @@ export class StudentService {
   connect(student: Student, university: University): Observable<boolean> {
     this.progress.inProgress(true);
     const params = new HttpParams().set('studentUserName', student.userName).set('universityName', university.name);
-    return this.httpClient.post(AppSettings.API_ENDPOINT + 'student/connect', '', {params: params, observe: 'response'})
+    return this.httpClient.post(AppSettings.API_STUDENT_ENDPOINT + 'student/connect', '', {params: params, observe: 'response'})
       .map(result => {
         this.progress.inProgress(false);
         return result.status == 200;

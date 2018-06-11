@@ -12,7 +12,7 @@ export class UniversityService {
   constructor(private authService: AuthService, private httpClient: HttpClient) { }
 
   private getBaseUri(): string {
-    return AppSettings.API_ENDPOINT + `${this.authService.currentUser.universityName}/admin/${this.authService.currentUser.userName}/`;
+    return AppSettings.API_UNIVERSITY_ENDPOINT + `${this.authService.currentUser.universityName}/admin/${this.authService.currentUser.userName}/`;
   }
 
   fetchSchemaDefinitions() {

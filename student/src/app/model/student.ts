@@ -5,4 +5,8 @@ export class Student {
   lastName: string;
   ssn: string;
   originUniversityName: string;
+
+  constructor (userName: string) {
+    this.userName = userName;
+  }
 }
